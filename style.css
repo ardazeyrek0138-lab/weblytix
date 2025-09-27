@@ -1,0 +1,495 @@
+/* ======================================================= */
+/* 1. GENEL AYARLAR VE YAPILANDIRMA */
+/* ======================================================= */
+:root {
+    --ana-mavi: #03254C; /* Koyu Mavi */
+    --vurgu-sari: #FFCC00; /* Parlak Sarı (İkonlar) */
+    --vurgu-kirmizi: #CC0000; /* Kırmızı (Başlıklar/Önemli Vurgu) */
+    --beyaz: #ffffff;
+    --gri: #f4f4f4;
+    --golge: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: var(--beyaz);
+    color: #333;
+}
+/* Yapışkan Header'dan sonra içeriği başlatmak için */
+#hizmetler, #hakkimizda, #iletisim, #hero {
+    padding-top: 80px; /* Header yüksekliği kadar boşluk bırak */
+}
+
+/* Ana sayfa hero alanı için özel ayar */
+#hero {
+    padding-top: 100px; /* Daha fazla üst boşluk */
+    padding-bottom: 100px;
+}
+
+/* Header yapışkan olduğu için bu boşluk gerek */
+section {
+    padding-top: 30px; 
+    padding-bottom: 30px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Tüm Linkler */
+a {
+    color: var(--ana-mavi);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--vurgu-sari);
+}
+
+/* Başlıklar ve Vurgular */
+.vurgulu-baslik {
+    font-size: 30px;
+    color: var(--vurgu-kirmizi);
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--vurgu-kirmizi);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+
+/* ======================================================= */
+/* 2. HEADER VE NAVİGASYON (MENÜ) */
+/* ======================================================= */
+
+header {
+    background: var(--ana-mavi);
+    color: var(--beyaz);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px var(--golge);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Stili */
+.site-logo a {
+    color: var(--beyaz);
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-logo-img {
+    height: 30px; /* Logo boyutunu ayarla */
+    width: auto;
+}
+
+/* Navigasyon Listesi */
+header ul {
+    list-style: none;
+    display: flex;
+}
+
+header li a {
+    color: var(--beyaz);
+    padding: 10px 15px;
+    display: block;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+header li a:hover {
+    color: var(--vurgu-sari);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Aktif Sayfa Vurgusu */
+header li a.active {
+    color: var(--vurgu-sari);
+    border-bottom: 2px solid var(--vurgu-sari);
+}
+
+/* Hamburger Butonu Stilleri */
+.hamburger-menu-button {
+    display: none; /* Varsayılan olarak masaüstünde gizli */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 20; /* Navigasyonun üstünde durması için */
+}
+
+.hamburger-menu-button span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--beyaz); /* Çizgi rengi */
+    margin: 4px 0;
+    transition: 0.3s;
+}
+
+/* Navigasyon listesinin mobil animasyon için gizlenmesi */
+header nav {
+    max-height: none; 
+    overflow: visible; 
+    transition: none; 
+}
+
+/* ======================================================= */
+/* 3. CTA BUTONLARI VE GENEL VURGULAR */
+/* ======================================================= */
+
+.cta-button {
+    display: inline-block;
+    background: var(--vurgu-kirmizi);
+    color: var(--beyaz);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s, transform 0.3s;
+    border: none;
+}
+
+.cta-button:hover {
+    background: #a30000; /* Koyu Kırmızı */
+    transform: translateY(-2px);
+    color: var(--beyaz);
+}
+
+
+/* ======================================================= */
+/* 4. ANA İÇERİK BÖLÜMLERİ */
+/* ======================================================= */
+
+/* HERO (Ana Sayfa Başlık) */
+#hero {
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    background-color: var(--ana-mavi);
+    color: var(--beyaz);
+    padding: 100px 0;
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+#hero p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/* HİZMETLER VE KARTLAR */
+#hizmetler, #hakkimizda, #iletisim {
+    padding: 80px 0;
+    background-color: var(--gri); /* Tüm içerik sayfalarına gri zemin */
+}
+
+/* 3'lü İkon Kartları (template-grid) */
+.template-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: center;
+}
+
+.template-item {
+    flex: 1;
+    background: var(--ana-mavi);
+    color: var(--beyaz);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--golge);
+    transition: transform 0.3s;
+}
+
+.template-item:hover {
+    transform: translateY(-5px);
+}
+
+.template-icon {
+    font-size: 40px;
+    color: var(--vurgu-sari);
+    margin-bottom: 15px;
+}
+
+.template-item h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Diğer Hizmet Kartları (service-grid) */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.service-item {
+    background: var(--beyaz);
+    padding: 25px;
+    border-left: 5px solid var(--vurgu-kirmizi);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+.service-item h4 {
+    color: var(--ana-mavi);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.service-item i {
+    margin-right: 10px;
+    color: var(--vurgu-kirmizi);
+}
+
+/* İLETİŞİM FORMU */
+#iletisim {
+    text-align: center;
+}
+
+.iletisim-aciklama {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-form {
+    max-width: 550px;
+    margin: 0 auto 40px auto;
+    padding: 35px;
+    background: var(--beyaz);
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
+    text-align: left;
+    border: 3px solid #007bff; /* Mavi çerçeve */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--vurgu-kirmizi); 
+    box-shadow: 0 0 5px rgba(204, 0, 0, 0.7); 
+    outline: none;
+}
+
+.contact-form .cta-button {
+    background: #28a745; /* Yeşil Buton */
+    width: 100%;
+}
+
+.contact-form .cta-button:hover {
+    background: #1e7e34; /* Koyu Yeşil */
+    transform: none;
+}
+
+.iletisim-bilgi {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.iletisim-bilgi h4 {
+    color: var(--vurgu-kirmizi);
+    margin-bottom: 10px;
+}
+
+
+/* ======================================================= */
+/* 5. FOOTER (Alt Bilgi) */
+/* ======================================================= */
+
+footer {
+    background: var(--ana-mavi);
+    color: var(--beyaz);
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer .social-links {
+    margin-bottom: 15px;
+}
+
+.social-icon {
+    display: inline-block;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 5px;
+    border-radius: 50%;
+    color: var(--beyaz);
+    transition: background-color 0.3s;
+}
+
+.social-icon.whatsapp { background: #25D366; }
+.social-icon.instagram { background: #C13584; }
+.social-icon.mail { background: var(--vurgu-kirmizi); }
+
+.social-icon:hover {
+    opacity: 0.8;
+}
+
+/* ======================================================= */
+/* 6. MOBİL UYUM (Responsive Design) - KESİN ÇÖZÜM */
+/* ======================================================= */
+
+@media (max-width: 850px) {
+    
+    /* HEADER DÜZENLEMESİ */
+    header .container {
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center;
+        padding: 10px 20px; 
+    }
+
+    /* 1. HAMBURGER BUTONUNU GÖRÜNÜR YAP */
+    .hamburger-menu-button {
+        display: block; 
+    }
+    
+    /* Navigasyon Listesinin Mobil Görünümü */
+    header nav {
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        width: 100%;
+        background-color: var(--ana-mavi);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        
+        /* Mobil Menü Animasyonu */
+        max-height: 0; 
+        overflow: hidden; 
+        transition: max-height 0.3s ease-out;
+    }
+    
+    header nav.menu-acik {
+        max-height: 500px; /* Açıldığında menüye yetecek kadar yükseklik */
+    }
+
+    header ul {
+        flex-direction: column; 
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    header li {
+        width: 90%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    header a {
+        display: block;
+        padding: 10px;
+        font-size: 16px; 
+    }
+
+    /* 2. ANA SAYFA VE GENEL BAŞLIKLAR */
+    #hero h1 {
+        font-size: 32px;
+    }
+
+    .vurgulu-baslik {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    
+    /* 3. HİZMETLER VE İÇERİK IZGARALARI DÜZENLEMESİ */
+    .template-grid,
+    .service-grid {
+        flex-direction: column; 
+        gap: 20px;
+        padding: 0 20px; 
+    }
+    
+    .template-item {
+        width: 100%; 
+        padding: 20px;
+    }
+    
+    .template-item p { 
+        font-size: 15px; 
+    }
+    
+    /* CTA Butonları */
+    .hero-actions {
+        flex-direction: column; 
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .cta-button {
+        width: 90%;
+        text-align: center;
+    }
+}
+
