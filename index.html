@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weblytix – Profesyonel Web Tasarımcısı | Modern ve Hızlı Siteler</title>
-  <meta name="description" content="Weblytix ile profesyonel, kullanıcı odaklı ve SEO dostu web siteleri tasarlayın. Kurumsal, e-ticaret ve landing page çözümleri sunuyoruz.">
+  <title>Weblytix – Web Tasarımcısı | Dijital Varlığını Yeniden Tanımla</title>
+  <meta name="description" content="Weblytix ile dijital varlığını yeniden tanımla. Profesyonel, hızlı ve dönüşüm odaklı web siteleri tasarlıyorum.">
   <link rel="stylesheet" href="style.css" />
   
   <!-- Google Analytics -->
@@ -19,51 +19,50 @@
 <body>
   <header>
     <div class="container">
-      <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
-      <nav>
+      <div class="logo-container">
+        <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
+        <span class="logo-text">Weblytix</span>
+      </div>
+      <nav id="mainNav">
         <a href="index.html">Ana Sayfa</a>
         <a href="hakkimizda.html">Hakkımızda</a>
         <a href="hizmetler.html">Hizmetler</a>
         <a href="iletisim.html">İletişim</a>
       </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Dijital Varlığını Unutulmaz Kılalım</h1>
-      <p>Profesyonel, hızlı ve modern web siteleri tasarlıyorum. Kullanıcı deneyimi ve performans önceliğimdir.</p>
-      <a href="iletisim.html" class="btn">Hizmet Al</a>
-    </div>
-  </section>
-
-  <section class="services">
-    <div class="container">
-      <h2>Hizmetlerim</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Kurumsal Web Siteleri</h3>
-          <p>Markanızı yansıtan, güven veren ve dönüşüm odaklı siteler.</p>
-        </div>
-        <div class="card">
-          <h3>E-Ticaret Tasarımı</h3>
-          <p>Shopify, WooCommerce veya Trendyol entegrasyonlu alışveriş siteleri.</p>
-        </div>
-        <div class="card">
-          <h3>Landing Page</h3>
-          <p>Dönüştürme oranlarını artıran, hızlı kurulumlu kampanya sayfaları.</p>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Dijital Varlığını<br><span>Yeniden Tanımla.</span></h1>
+        <p class="subtitle">Web siten sadece bir adres değil —<br>markanın ilk izlenimi.</p>
+        <div class="cta-buttons">
+          <a href="hizmetler.html" class="btn primary">Hizmetlerimi Gör</a>
+          <a href="iletisim.html" class="btn secondary">Hemen Başla</a>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="hero-bg"></div>
+    </section>
+
+    <section class="philosophy">
+      <div class="container">
+        <p>Ben sadece “güzel” siteler yapmam.<br><strong>İşe yarayan</strong> siteler yaparım.</p>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
       <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
-
-
