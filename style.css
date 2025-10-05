@@ -12,6 +12,7 @@
   --gray: #94a3b8;
   --white: #ffffff;
   --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 body {
@@ -19,6 +20,7 @@ body {
   background: var(--light);
   color: var(--primary);
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 .container {
@@ -36,9 +38,10 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: var(--transition);
 }
 
 .logo-container {
@@ -49,6 +52,11 @@ header {
 
 .logo {
   height: 36px;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .logo-text {
@@ -56,6 +64,11 @@ header {
   font-weight: 800;
   color: var(--primary);
   letter-spacing: -0.5px;
+  transition: var(--transition);
+}
+
+.logo-text:hover {
+  color: var(--accent);
 }
 
 nav {
@@ -111,6 +124,7 @@ nav a:hover::after {
   align-items: center;
   position: relative;
   padding-top: 80px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 .hero-content {
@@ -119,11 +133,12 @@ nav a:hover::after {
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   letter-spacing: -1.5px;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .hero h1 span {
@@ -137,11 +152,13 @@ nav a:hover::after {
   color: var(--gray);
   margin-bottom: 2.5rem;
   line-height: 1.4;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .cta-buttons {
   display: flex;
   gap: 1.2rem;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
 .btn {
@@ -180,6 +197,8 @@ nav a:hover::after {
 .philosophy {
   padding: 4rem 0;
   text-align: center;
+  background: white;
+  box-shadow: var(--shadow);
 }
 
 .philosophy p {
@@ -187,10 +206,104 @@ nav a:hover::after {
   font-weight: 700;
   line-height: 1.3;
   color: var(--primary);
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .philosophy strong {
   color: var(--accent);
+}
+
+/* ——— ABOUT ——— */
+.about {
+  padding: 4rem 0;
+  background: white;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--gray);
+}
+
+/* ——— SERVICES ——— */
+.services-detail {
+  padding: 4rem 0;
+  background: white;
+}
+
+.service-item {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.service-item h2 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+}
+
+/* ——— CONTACT ——— */
+.contact {
+  padding: 4rem 0;
+  background: white;
+}
+
+.contact-form-container {
+  max-width: 600px;
+  margin: 2rem auto 0;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
 /* ——— FOOTER ——— */
@@ -198,7 +311,50 @@ footer {
   text-align: center;
   padding: 2rem 0;
   color: var(--gray);
-  margin-top: 4rem;
+  border-top: 1px solid #eee;
+  background: white;
+  margin-top: 2rem;
+}
+
+/* ——— SOCIAL LINKS ——— */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.social-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  min-width: 140px;
+  transition: var(--transition);
+}
+
+.social-btn:hover {
+  opacity: 0.9;
+}
+
+.whatsapp { background: #25D366; }
+.instagram { background: #E1306C; }
+.email { background: #4f46e5; }
+
+/* ——— ANIMATIONS ——— */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ——— MOBIL ——— */
@@ -247,20 +403,8 @@ footer {
   .philosophy p {
     font-size: 1.8rem;
   }
-}
 
-/* ——— ANIMASYONLAR ——— */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+  .contact-form-container {
+    padding: 1.5rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-content {
-  animation: fadeInUp 0.8s ease-out;
 }
