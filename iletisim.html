@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>İletişim – Weblytix Web Tasarımcısı</title>
-  <meta name="description" content="Web tasarımı hizmeti almak için Weblytix ile iletişime geçin. Email, WhatsApp veya iletişim formu ile bize ulaşabilirsiniz.">
+  <title>İletişim – Weblytix</title>
+  <meta name="description" content="Web tasarımı hizmeti almak için Weblytix ile iletişime geçin.">
   <link rel="stylesheet" href="style.css" />
   
   <!-- Google Analytics -->
@@ -25,7 +25,7 @@
       </div>
       <nav id="mainNav">
         <a href="index.html">Ana Sayfa</a>
-        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="hakkimizda.html">Hakkımda</a>
         <a href="hizmetler.html">Hizmetler</a>
         <a href="iletisim.html">İletişim</a>
       </nav>
@@ -37,62 +37,39 @@
     </div>
   </header>
 
-  <section class="contact">
+  <section class="section">
     <div class="container">
-      <h1>İletişim</h1>
-      <p>Bir proje için iş birliği yapmak ister misiniz? Aşağıdaki yollarla bana ulaşabilir veya formu doldurabilirsiniz.</p>
-
-      <!-- Sosyal Medya Butonları -->
-      <div class="social-links">
-        <a href="https://wa.me/5540104109" target="_blank" class="social-btn whatsapp">
-          WhatsApp
-        </a>
-       <a href="https://www.instagram.com/webly.tix?igsh=MTl1azBmcm1yOGUyNw==" target="_blank" class="social-btn instagram">
-          Instagram
-        </a>
-        <a href="mailto:weblitix@gmail.com" class="social-btn email">
-          Email
-        </a>
-      </div>
-
-      <!-- Formspree Formu -->
-      <div class="contact-form-container">
-        <form action="https://formspree.io/f/mnngjvkz" method="POST">
-          <div class="form-group">
-            <label for="name">Adınız</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Mesajınız</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn primary">Gönder</button>
-        </form>
-
-        <!-- Teşekkür Mesajı (Başlangıçta gizli) -->
-        <div id="thankYouMessage" style="display:none; margin-top:2rem; text-align:center; color:#10B981; font-weight:bold;">
-          Mesajınız gönderildi! En kısa sürede dönüş yapacağım. 🙌
+      <h2 class="section-title">İletişim</h2>
+      <form action="https://formspree.io/f/mnngjvkz" method="POST" class="contact-form">
+        <div class="form-group">
+          <label for="name">İsim</label>
+          <input type="text" id="name" name="name" required>
         </div>
+        <div class="form-group">
+          <label for="email">E-posta</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mesaj</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">Gönder</button>
+      </form>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/webly.tix?igsh=MTl1azBmcm1yOGUyNw==" target="_blank" aria-label="Instagram">IG</a>
+        <a href="mailto:weblitix@gmail.com" aria-label="Email">✉️</a>
+        <a href="https://wa.me/905540104109" target="_blank" aria-label="WhatsApp">WA</a>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
+      <p>© 2025 Weblytix. Tüm hakları saklıdır.</p>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
