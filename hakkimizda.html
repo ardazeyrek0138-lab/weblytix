@@ -19,13 +19,21 @@
 <body>
   <header>
     <div class="container">
-      <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
-      <nav>
+      <div class="logo-container">
+        <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
+        <span class="logo-text">Weblytix</span>
+      </div>
+      <nav id="mainNav">
         <a href="index.html">Ana Sayfa</a>
         <a href="hakkimizda.html">Hakkımızda</a>
         <a href="hizmetler.html">Hizmetler</a>
         <a href="iletisim.html">İletişim</a>
       </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -46,7 +54,7 @@
       <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
-
