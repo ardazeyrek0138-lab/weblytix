@@ -19,31 +19,65 @@
 <body>
   <header>
     <div class="container">
-      <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
-      <nav>
+      <div class="logo-container">
+        <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
+        <span class="logo-text">Weblytix</span>
+      </div>
+      <nav id="mainNav">
         <a href="index.html">Ana Sayfa</a>
         <a href="hakkimizda.html">Hakkımızda</a>
         <a href="hizmetler.html">Hizmetler</a>
         <a href="iletisim.html">İletişim</a>
       </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
   <section class="contact">
     <div class="container">
       <h1>İletişim</h1>
-      <p>Bir proje için iş birliği yapmak ister misiniz? Aşağıdaki yollarla bana ulaşabilirsiniz:</p>
-      
-      <div class="contact-info">
-        <p><strong>Email:</strong> <a href="mailto:info@weblytix.online">info@weblytix.online</a></p>
-        <!-- İstersen WhatsApp ekleyebilirsin:
-        <p><strong>WhatsApp:</strong> <a href="https://wa.me/905551234567" target="_blank">+90 555 123 45 67</a></p>
-        -->
+      <p>Bir proje için iş birliği yapmak ister misiniz? Aşağıdaki yollarla bana ulaşabilir veya formu doldurabilirsiniz.</p>
+
+      <!-- Sosyal Medya Butonları -->
+      <div class="social-links">
+        <a href="https://wa.me/905551234567" target="_blank" class="social-btn whatsapp">
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/weblytix" target="_blank" class="social-btn instagram">
+          Instagram
+        </a>
+        <a href="mailto:info@weblytix.online" class="social-btn email">
+          Email
+        </a>
       </div>
 
-      <p style="margin-top: 2rem;">
-        <a href="mailto:info@weblytix.online?subject=Web Tasarımı Hizmeti&body=Merhaba, bir proje için görüşmek istiyorum." class="btn">Mesaj Gönder</a>
-      </p>
+      <!-- Formspree Formu -->
+      <div class="contact-form-container">
+        <form action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="form-group">
+            <label for="name">Adınız</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Mesajınız</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn primary">Gönder</button>
+        </form>
+
+        <!-- Teşekkür Mesajı (Başlangıçta gizli) -->
+        <div id="thankYouMessage" style="display:none; margin-top:2rem; text-align:center; color:#10B981; font-weight:bold;">
+          Mesajınız gönderildi! En kısa sürede dönüş yapacağım. 🙌
+        </div>
+      </div>
     </div>
   </section>
 
@@ -52,7 +86,7 @@
       <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
-
