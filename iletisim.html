@@ -1,93 +1,56 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weblytix - İletişim</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İletişim – Weblytix Web Tasarımcısı</title>
+  <meta name="description" content="Web tasarımı hizmeti almak için Weblytix ile iletişime geçin. Email, WhatsApp veya iletişim formu ile bize ulaşabilirsiniz.">
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
-   <header>
+  <header>
     <div class="container">
-        <div class="site-logo">
-            <a href="index.html">
-                <img src="weblytix.logo.png" alt="Weblytix Logo" class="header-logo-img">
-                WEBLYTIX
-            </a>
-        </div>
-        
-        <button class="hamburger-menu-button">
-            <span></span> 
-            <span></span>
-            <span></span>
-        </button>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">ANA SAYFA</a></li>
-                <li><a href="hizmetler.html">HİZMETLER</a></li>
-                <li><a href="hakkimizda.html">HAKKIMIZDA</a></li>
-                <li><a href="iletisim.html">İLETİŞİM</a></li>
-            </ul>
-        </nav>
+      <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
+      <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="hizmetler.html">Hizmetler</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-    <section id="iletisim">
-        <div class="container">
-            <h3 class="vurgulu-baslik">Dijital Başarıya İlk Adımı Atın</h3>
-            <p class="iletisim-aciklama">Stratejinizi konuşmak ve Weblytix'in farkını görmek için formu doldurun veya doğrudan ulaşım kanallarımızı kullanın.</p>
+  <section class="contact">
+    <div class="container">
+      <h1>İletişim</h1>
+      <p>Bir proje için iş birliği yapmak ister misiniz? Aşağıdaki yollarla bana ulaşabilirsiniz:</p>
+      
+      <div class="contact-info">
+        <p><strong>Email:</strong> <a href="mailto:info@weblytix.online">info@weblytix.online</a></p>
+        <!-- İstersen WhatsApp ekleyebilirsin:
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/905551234567" target="_blank">+90 555 123 45 67</a></p>
+        -->
+      </div>
 
-           <form action="https://formspree.io/f/mnngjvkz" method="POST" class="contact-form">
-                <div class="form-group">
-                    <label for="ad">Adınız ve Soyadınız:</label>
-                    <input type="text" id="ad" name="ad" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">E-posta Adresiniz:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="konu">Konu Başlığı:</label>
-                    <input type="text" id="konu" name="konu" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="mesaj">Mesajınız:</label>
-                    <textarea id="mesaj" name="mesaj" rows="5" required></textarea>
-                </div>
-                
-                <button type="submit" class="cta-button primary">Mesajı Gönder</button>
-            </form>
-            
-            <div class="iletisim-bilgi">
-                <h4>Doğrudan İletişim Bilgileri</h4>
-                <p>E-posta: weblitix@gmail.com</p>
-                
-            </div>
-        </div>
-    </section>
+      <p style="margin-top: 2rem;">
+        <a href="mailto:info@weblytix.online?subject=Web Tasarımı Hizmeti&body=Merhaba, bir proje için görüşmek istiyorum." class="btn">Mesaj Gönder</a>
+      </p>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://wa.me/905551234567" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/webly.tix?igsh=MTl1azBmcm1yOGUyNw==" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:weblitix@gmail.com" class="social-icon mail"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy; 2025 Weblytix. Tüm Hakları Saklıdır.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script> 
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
 </body>
-
 </html>
-
-
-
-
-
-
