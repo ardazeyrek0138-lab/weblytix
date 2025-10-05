@@ -1,98 +1,64 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weblytix - Hizmetler ve Şablonlar</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hizmetler – Weblytix Web Tasarımı</title>
+  <meta name="description" content="Kurumsal web siteleri, e-ticaret çözümleri, landing page tasarımı ve responsive tasarım hizmetleri. Weblytix ile dijital varlığınızı yükseltin.">
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
-<header>
+  <header>
     <div class="container">
-        <div class="site-logo">
-            <a href="index.html">
-                <img src="weblytix.logo.png" alt="Weblytix Logo" class="header-logo-img">
-                WEBLYTIX
-            </a>
-        </div>
-        
-        <button class="hamburger-menu-button">
-            <span></span> 
-            <span></span>
-            <span></span>
-        </button>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">ANA SAYFA</a></li>
-                <li><a href="hizmetler.html">HİZMETLER</a></li>
-                <li><a href="hakkimizda.html">HAKKIMIZDA</a></li>
-                <li><a href="iletisim.html">İLETİŞİM</a></li>
-            </ul>
-        </nav>
+      <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
+      <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="hizmetler.html">Hizmetler</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-    <section id="hizmetler">
-        <div class="container">
-            <h3 class="vurgulu-baslik">STRATEJİNİZ BİZİM ELİMİZDE BİR TESADÜF DEĞİL, BİR BAŞYAPITTIR.</h3>
+  <section class="services-detail">
+    <div class="container">
+      <h1>Hizmetlerim</h1>
+      
+      <div class="service-item">
+        <h2>Kurumsal Web Siteleri</h2>
+        <p>Şirketinizin kimliğini yansıtan, profesyonel ve güven veren web siteleri tasarlıyoruz. SEO uyumlu, hızlı ve tüm cihazlarda sorunsuz çalışan yapılar ile markanızı dijitalde güçlendiriyoruz.</p>
+      </div>
 
-            <div class="template-grid">
-                
-                <div class="template-item">
-                    <div class="template-icon"><i class="fas fa-microchip"></i></div>
-                    <h5>VERİ MİMARİSİ VE TASARIM</h5>
-                    <p>Her pikselin dönüşüme hizmet ettiği, analitik verilerle desteklenen kullanıcı deneyimi (UX) tasarımı.</p>
-                </div>
-                
-                <div class="template-item">
-                    <div class="template-icon"><i class="fas fa-code"></i></div>
-                    <h5>OPTİMUM KOD VE HIZ PERFORMANSI</h5>
-                    <p>Sıfır gecikme, tam SEO uyumu. Projeleriniz, en temiz ve en güncel kod standartlarıyla kurulur.</p>
-                </div>
-                
-                <div class="template-item">
-                    <div class="template-icon"><i class="fas fa-chart-line"></i></div>
-                    <h5>ROI GARANTİLİ DÖNÜŞÜM STRATEJİLERİ</h5>
-                    <p>Yatırım Getirisini (ROI) merkeze alan, ölçülebilir ve sürekli optimize edilen dijital pazarlama planları.</p>
-                </div>
-            </div>
+      <div class="service-item">
+        <h2>E-Ticaret Tasarımı</h2>
+        <p>Shopify, WooCommerce veya Trendyol gibi platformlara özel alışveriş siteleri geliştiriyoruz. Ürün yönetimi, ödeme entegrasyonu ve kullanıcı deneyimi odaklı çözümler sunuyoruz.</p>
+      </div>
 
-            <h3 class="vurgulu-baslik" style="margin-top: 80px;">PROJELERİNİZİ YÖNETTİĞİMİZ TEMEL ALANLAR</h3>
-            
-            <div class="service-grid">
-                <div class="service-item">
-                    <h4><i class="fas fa-globe"></i> Kurumsal Web Çözümleri</h4>
-                    <p>Markanızın vizyonunu yansıtan, güvenilirlik odaklı, özelleştirilmiş kurumsal web siteleri.</p>
-                </div>
-                <div class="service-item">
-                    <h4><i class="fas fa-shopping-cart"></i> Gelişmiş E-Ticaret Sistemleri</h4>
-                    <p>Veri analizi ile desteklenen, yüksek trafik ve hızlı satış için tasarlanmış e-ticaret altyapıları.</p>
-                </div>
-                <div class="service-item">
-                    <h4><i class="fas fa-tools"></i> Özel Yazılım ve API Entegrasyonları</h4>
-                    <p>İhtiyaçlarınıza özel yazılım geliştirme, mevcut sistemlerle kusursuz API entegrasyonu.</p>
-                </div>
-            </div>
+      <div class="service-item">
+        <h2>Landing Page Tasarımı</h2>
+        <p>Kampanyalarınız için yüksek dönüşüm oranlı landing page’ler oluşturuyoruz. Hızlı kurulum, net çağrı ve analitik takibi ile pazarlama stratejilerinizi destekliyoruz.</p>
+      </div>
 
-        </div>
-    </section>
+      <div class="service-item">
+        <h2>Responsive (Mobil Uyumlu) Tasarım</h2>
+        <p>Tüm projelerimiz mobil, tablet ve masaüstü cihazlarda mükemmel görüntülenir. Google’ın mobil öncelikli indekslemesine tam uyumludur.</p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://wa.me/905551234567" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/webly.tix?igsh=MTl1azBmcm1yOGUyNw==" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:weblitix@gmail.com" class="social-icon mail"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy; 2025 Weblytix. Tüm Hakları Saklıdır.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script> 
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Weblytix. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
 </body>
-
 </html>
-
-
-
