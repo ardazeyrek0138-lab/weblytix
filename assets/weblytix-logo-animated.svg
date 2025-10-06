@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dizüstü Bilgisayar -->
+  <rect x="60" y="100" width="80" height="40" rx="5" fill="#00f3ff" stroke="#00a8ff" stroke-width="2"/>
+  <rect x="65" y="95" width="70" height="10" rx="3" fill="#00a8ff"/>
+  <rect x="95" y="145" width="10" height="5" rx="2" fill="#00a8ff"/>
+
+  <!-- Ekran İçeriği -->
+  <rect x="65" y="105" width="70" height="30" rx="3" fill="none" stroke="#00f3ff" stroke-width="1"/>
+  <path d="M80 115 L90 125 L100 115" stroke="#00a8ff" stroke-width="2" fill="none"/>
+  <circle cx="90" cy="120" r="2" fill="#ffffff"/>
+
+  <!-- Roket -->
+  <g id="rocket" class="rocket">
+    <path d="M100 90 L110 75 L100 60 L90 75 Z" fill="#00f3ff" stroke="#00a8ff" stroke-width="1"/>
+    <circle cx="100" cy="80" r="3" fill="#ffffff"/>
+    <path d="M100 60 L105 50 L95 50 Z" fill="#00a8ff"/>
+  </g>
+
+  <!-- Duman -->
+  <ellipse cx="100" cy="105" rx="15" ry="8" fill="#00f3ff" opacity="0.5"/>
+  <ellipse cx="90" cy="108" rx="10" ry="6" fill="#00a8ff" opacity="0.5"/>
+  <ellipse cx="110" cy="108" rx="10" ry="6" fill="#00f3ff" opacity="0.5"/>
+
+  <!-- Yazı -->
+  <text x="100" y="170" font-family="Arial" font-size="24" font-weight="bold" fill="#0b0c1a" text-anchor="middle">WEBLYTIX</text>
+
+  <!-- Animasyon -->
+  <style>
+    .rocket:hover {
+      animation: fly 2s ease-in-out infinite;
+    }
+    @keyframes fly {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</svg>
