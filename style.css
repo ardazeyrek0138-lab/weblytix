@@ -364,6 +364,34 @@ nav a:hover {
   font-family: inherit;
   transition: var(--transition);
 }
+.btn-neon {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: #00a8ff;
+  color: #0b0c1a;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px #00a8ff, 0 0 20px #00f3ff, 0 0 40px rgba(0,243,255,0.6);
+}
+
+.btn-neon:hover {
+  background: #00f3ff;
+  color: #000;
+  box-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff, 0 0 80px #00f3ff;
+  transform: translateY(-2px);
+}
+
+.btn-neon:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 15px #00f3ff;
+}
+
 
 .form-group input:focus,
 .form-group textarea:focus {
@@ -492,5 +520,6 @@ footer {
     font-size: 2rem;
   }
 }
+
 
 
