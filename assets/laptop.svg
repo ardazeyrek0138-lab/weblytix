@@ -1,14 +1,68 @@
-<svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="380" height="230" rx="12" fill="#0b0c1a" stroke="#00f3ff" stroke-width="2"/>
-  <rect x="20" y="20" width="360" height="210" rx="8" fill="#1a1a2e" />
-  <rect x="30" y="30" width="340" height="190" rx="4" fill="url(#screenGradient)" />
-  <rect x="170" y="230" width="60" height="10" rx="2" fill="#00f3ff" />
-  <circle cx="180" cy="235" r="2" fill="#00a8ff" />
-  <circle cx="190" cy="235" r="2" fill="#00a8ff" />
+<svg width="600" height="450" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Wall with LED Glow -->
+  <rect width="600" height="450" fill="#05060d"/>
+  <rect width="600" height="450" fill="url(#wallGlow)" opacity="0.3"/>
+
+  <!-- Desk Surface -->
+  <rect x="50" y="370" width="500" height="20" rx="2" fill="#0b0c1a" stroke="#00f3ff" stroke-width="1"/>
+  <rect x="50" y="390" width="500" height="20" fill="url(#deskLight)" opacity="0.6"/>
+
+  <!-- Monitor Frame -->
+  <rect x="140" y="80" width="320" height="200" rx="12" fill="#0b0c1a" stroke="#00f3ff" stroke-width="2"/>
+  <rect x="150" y="90" width="300" height="180" rx="8" fill="url(#screenGradient)" />
+
+  <!-- On-screen UI (Fake Weblytix Homepage) -->
+  <rect x="155" y="100" width="290" height="18" rx="4" fill="#111428" />
+  <text x="165" y="113" fill="#00f3ff" font-size="10" font-family="monospace">Weblytix</text>
+  <circle cx="415" cy="108" r="2" fill="#00f3ff" />
+  <circle cx="425" cy="108" r="2" fill="#00f3ff" />
+  <circle cx="435" cy="108" r="2" fill="#00f3ff" />
+
+  <!-- Hero Section -->
+  <text x="200" y="180" fill="#00f3ff" font-size="15" font-family="monospace" opacity="0.9">Profesyonel Web Tasarımları</text>
+  <rect x="220" y="195" width="160" height="30" rx="8" fill="#00f3ff" opacity="0.15"/>
+  <text x="270" y="213" fill="#00f3ff" font-size="10" font-family="monospace">Şimdi Keşfet</text>
+
+  <!-- Monitor Stand -->
+  <rect x="275" y="280" width="50" height="40" rx="5" fill="#0b0c1a" stroke="#00f3ff" stroke-width="2"/>
+  <rect x="225" y="320" width="150" height="10" rx="3" fill="#00f3ff" opacity="0.2"/>
+
+  <!-- Keyboard -->
+  <rect x="160" y="340" width="280" height="35" rx="6" fill="#0b0c1a" stroke="#00f3ff" stroke-width="1.5"/>
+  <g fill="#00a8ff" opacity="0.7">
+    <!-- Top Row -->
+    <rect x="170" y="350" width="20" height="8" rx="2"/>
+    <rect x="195" y="350" width="20" height="8" rx="2"/>
+    <rect x="220" y="350" width="20" height="8" rx="2"/>
+    <rect x="245" y="350" width="20" height="8" rx="2"/>
+    <rect x="270" y="350" width="20" height="8" rx="2"/>
+    <rect x="295" y="350" width="20" height="8" rx="2"/>
+    <rect x="320" y="350" width="20" height="8" rx="2"/>
+    <rect x="345" y="350" width="20" height="8" rx="2"/>
+    <rect x="370" y="350" width="20" height="8" rx="2"/>
+    <rect x="395" y="350" width="20" height="8" rx="2"/>
+  </g>
+
+  <!-- Ambient LED Glow Behind Monitor -->
+  <ellipse cx="300" cy="210" rx="200" ry="90" fill="#00f3ff" opacity="0.1"/>
+
+  <!-- Gradient Definitions -->
   <defs>
     <linearGradient id="screenGradient" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#00a8ff" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#00a8ff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <radialGradient id="wallGlow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#05060d" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="deskLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00a8ff"/>
+      <stop offset="50%" stop-color="#00f3ff"/>
+      <stop offset="100%" stop-color="#00a8ff"/>
     </linearGradient>
   </defs>
 </svg>
+
