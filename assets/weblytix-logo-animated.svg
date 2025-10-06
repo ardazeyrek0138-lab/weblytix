@@ -1,115 +1,38 @@
-<!-- Yapıştırılacak: inline SVG. Hover ile roket uçacak. -->
-<div style="display:flex;justify-content:center;padding:40px;background:#000;">
-  <!-- SVG başlangıç -->
-  <svg viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <!-- Neon glow filter -->
-      <filter id="neon">
-        <feGaussianBlur stdDeviation="4" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dizüstü Bilgisayar -->
+  <rect x="60" y="100" width="80" height="40" rx="5" fill="#00f3ff" stroke="#00a8ff" stroke-width="2"/>
+  <rect x="65" y="95" width="70" height="10" rx="3" fill="#00a8ff"/>
+  <rect x="95" y="145" width="10" height="5" rx="2" fill="#00a8ff"/>
 
-      <!-- Soft outer glow for larger effect -->
-      <filter id="outerGlow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="6" result="g"/>
-        <feFlood flood-color="#39f" flood-opacity="0.6"/>
-        <feComposite in2="g" operator="in"/>
-        <feMerge>
-          <feMergeNode/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
+  <!-- Ekran İçeriği -->
+  <rect x="65" y="105" width="70" height="30" rx="3" fill="none" stroke="#00f3ff" stroke-width="1"/>
+  <path d="M80 115 L90 125 L100 115" stroke="#00a8ff" stroke-width="2" fill="none"/>
+  <circle cx="90" cy="120" r="2" fill="#ffffff"/>
 
-      <!-- Gradient for rocket body -->
-      <linearGradient id="bodyGrad" x1="0" x2="1">
-        <stop offset="0" stop-color="#68e0ff"/>
-        <stop offset="1" stop-color="#0077ff"/>
-      </linearGradient>
+  <!-- Roket -->
+  <g id="rocket" class="rocket">
+    <path d="M100 90 L110 75 L100 60 L90 75 Z" fill="#00f3ff" stroke="#00a8ff" stroke-width="1"/>
+    <circle cx="100" cy="80" r="3" fill="#ffffff"/>
+    <path d="M100 60 L105 50 L95 50 Z" fill="#00a8ff"/>
+  </g>
 
-      <!-- small glow for flame -->
-      <radialGradient id="flameGrad">
-        <stop offset="0" stop-color="#fff59b"/>
-        <stop offset="1" stop-color="#ff6b00"/>
-      </radialGradient>
-    </defs>
+  <!-- Duman -->
+  <ellipse cx="100" cy="105" rx="15" ry="8" fill="#00f3ff" opacity="0.5"/>
+  <ellipse cx="90" cy="108" rx="10" ry="6" fill="#00a8ff" opacity="0.5"/>
+  <ellipse cx="110" cy="108" rx="10" ry="6" fill="#00f3ff" opacity="0.5"/>
 
-    <style>
-      /* temel neon görünüm */
-      .outline { stroke: #7fe3ff; stroke-width:2.8; fill: none; filter: url(#neon); }
-      .fill { fill: url(#bodyGrad); stroke: #9fe9ff; stroke-width:1.4; filter: url(#outerGlow); }
-      .text { fill:#e6f7ff; font-family: Arial, Helvetica, sans-serif; font-weight:700; font-size:26px; letter-spacing:1px; filter: url(#neon); }
-      .screen { fill: rgba(0,0,0,0.12); stroke: #00b0ff; stroke-width:2; filter: url(#neon); }
+  <!-- Yazı -->
+  <text x="100" y="170" font-family="Arial" font-size="24" font-weight="bold" fill="#0b0c1a" text-anchor="middle">WEBLYTIX</text>
 
-      /* Roket grubu, hover ile uçacak */
-      .rocket { transform-box: fill-box; transform-origin: 50% 80%; transition: filter .2s ease; }
-      .rocket .body { transform-box: fill-box; transform-origin: 50% 80%; }
-
-      /* animasyon tanımı */
-      @keyframes fly {
-        0%   { transform: translateY(0) scale(1); opacity:1; }
-        40%  { transform: translateY(-40px) scale(1.02); }
-        100% { transform: translateY(-240px) scale(0.9); opacity:0; }
-      }
-      @keyframes smokeFade {
-        0% { opacity:1; transform: translateY(0) scale(1); }
-        100% { opacity:0; transform: translateY(-120px) scale(0.6); }
-      }
-
-      /* hover tetiklemesi: roketin üzerine gelince uçsun */
-      .rocket:hover { animation: fly 1.2s cubic-bezier(.2,.9,.3,1) forwards; cursor: pointer; }
-      .rocket:hover ~ .smoke { animation: smokeFade 1.2s ease-out forwards; }
-
-      /* küçük neon hareketi: hover olmasa bile hafif parıldasın */
-      .pulse { animation: pulseGlow 2.6s ease-in-out infinite; }
-      @keyframes pulseGlow {
-        0% { filter: drop-shadow(0 0 4px rgba(60,180,255,0.7)); }
-        50% { filter: drop-shadow(0 0 10px rgba(60,180,255,0.9)); }
-        100% { filter: drop-shadow(0 0 4px rgba(60,180,255,0.7)); }
-      }
-    </style>
-
-    <!-- ekran ve laptop altı -->
-    <g transform="translate(30,30)">
-      <rect x="20" y="120" width="220" height="100" rx="8" class="screen"/>
-      <rect x="10" y="220" width="240" height="10" rx="4" fill="#084" opacity="0.08"/>
-    </g>
-
-    <!-- Roket ve bulut (rokete hover olunca uçsun) -->
-    <g transform="translate(60,40)">
-      <!-- bulut / duman (ayrık grup, hover ile fade olacak) -->
-      <g class="smoke" opacity="1">
-        <ellipse cx="110" cy="145" rx="60" ry="20" fill="#bfefff" opacity="0.25"/>
-        <ellipse cx="80" cy="150" rx="30" ry="12" fill="#cff4ff" opacity="0.22"/>
-        <ellipse cx="140" cy="150" rx="28" ry="11" fill="#bfefff" opacity="0.22"/>
-      </g>
-
-      <!-- Roket grubu -->
-      <g class="rocket pulse" transform="translate(0,0)">
-        <!-- roket gövdesi -->
-        <g class="body" transform="translate(70,80)">
-          <path d="M0 -36 C8 -36 16 -28 16 -20 C16 -6 16 18 0 36 C-16 18 -16 -6 -16 -20 C-16 -28 -8 -36 0 -36 Z"
-                class="fill" />
-          <!-- penceresi -->
-          <circle cx="0" cy="-12" r="6" fill="#eaffff" stroke="#bff" stroke-width="1.2" />
-          <!-- yan kanatlar -->
-          <path d="M16 -6 L34 6 L18 16 Z" fill="#39b3ff" stroke="#8fe0ff" stroke-width="1"/>
-          <path d="M-16 -6 L-34 6 L-18 16 Z" fill="#39b3ff" stroke="#8fe0ff" stroke-width="1"/>
-          <!-- nozul / alev -->
-          <g transform="translate(0,36)">
-            <ellipse rx="10" ry="6" fill="url(#flameGrad)" opacity="0.95"/>
-            <path d="M0 6 C6 10 12 14 0 26 C-12 14 -6 10 0 6 Z" fill="url(#flameGrad)" opacity="0.95"/>
-          </g>
-        </g>
-      </g>
-    </g>
-
-    <!-- Logo altı yazı (neon) -->
-    <g transform="translate(0,240)">
-      <text x="50%" y="0" text-anchor="middle" class="text">WEBLYTIX</text>
-    </g>
-  </svg>
-  <!-- SVG bitiş -->
-</div>
+  <!-- Animasyon -->
+  <style>
+    .rocket:hover {
+      animation: fly 2s ease-in-out infinite;
+    }
+    @keyframes fly {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</svg>
