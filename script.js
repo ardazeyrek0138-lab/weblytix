@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Hamburger Menü
   const hamburger = document.getElementById('hamburgerBtn');
   const nav = document.getElementById('mainNav');
 
@@ -17,11 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Formspree Form (isteğe bağlı JS ile)
   const forms = document.querySelectorAll('form[action^="https://formspree.io"]');
   forms.forEach(form => {
     form.addEventListener('submit', function(e) {
-      // Formspree otomatik işler, JS gerekmez ama GA için:
       if (typeof gtag === 'function') {
         gtag('event', 'form_submit', {
           event_category: 'Contact',
