@@ -372,7 +372,12 @@ nav a:hover {
   box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
 }
 
-/* ——— SOCIAL ICONS ——— */
+:root {
+  --accent: #00f3ff;
+  --accent2: #00a8ff;
+  --transition: all 0.3s ease;
+}
+
 .social-icons {
   display: flex;
   gap: 1.5rem;
@@ -387,7 +392,7 @@ nav a:hover {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(25, 25, 45, 0.6);
+  background: rgba(15, 20, 35, 0.9);
   border: 2px solid rgba(0, 243, 255, 0.3);
   color: var(--accent);
   text-decoration: none;
@@ -397,7 +402,7 @@ nav a:hover {
 .social-icons a:hover {
   background: rgba(0, 243, 255, 0.1);
   transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
 }
 
 .social-icons a svg {
@@ -409,7 +414,7 @@ nav a:hover {
 
 .social-icons a:hover svg {
   fill: var(--accent2);
-  transform: rotate(10deg);
+  transform: rotate(8deg);
 }
 
 /* ——— FOOTER ——— */
@@ -487,4 +492,5 @@ footer {
     font-size: 2rem;
   }
 }
+
 
