@@ -131,7 +131,7 @@
 <div id="demo-popup" class="demo-popup">
   <div class="demo-popup-content">
     <span class="close-btn">&times;</span>
-    <iframe id="demo-frame" style="width:100%; height:350px; border:none; border-radius:10px;"></iframe>
+    <div id="demo-content"></div>
   </div>
 </div>
 
@@ -165,105 +165,107 @@
 .close-btn {
   position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#00ffff;
 }
+
+/* Mini demo site stilleri */
+.demo-site { background:#222; padding:15px; border-radius:10px; }
+.demo-site header { background:#00ffff; color:#111; text-align:center; font-weight:bold; padding:10px; border-radius:8px; margin-bottom:10px; }
+.demo-site nav { display:flex; justify-content:center; gap:10px; margin-bottom:10px; }
+.demo-site nav a { color:#00ffff; text-decoration:none; font-weight:bold; }
+.demo-site .cards { display:flex; gap:10px; flex-wrap:wrap; }
+.demo-site .card { background:#111; padding:10px; border-radius:8px; flex:1 1 30%; text-align:center; }
+.demo-site .card button { background:#00ffff; color:#111; padding:5px 10px; border:none; border-radius:5px; cursor:pointer; margin-top:5px; }
 </style>
 
 <!-- JS -->
 <script>
-// Mini HTML demo içerikleri (iframe içine yüklenir)
+const demoPopup = document.getElementById("demo-popup");
+const demoContent = document.getElementById("demo-content");
+const closeBtn = document.querySelector(".close-btn");
+
+// Mini demo içerikleri
 const demoTemplates = {
   template1: `
-    <html>
-      <head>
-        <style>
-          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
-          nav{display:flex;justify-content:center;gap:10px;padding:5px;background:#333;}
-          nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
-          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
-          .btn{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;}
-        </style>
-      </head>
-      <body>
-        <header>Lezzet Restoranı</header>
-        <nav><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
-        <div class="content">
-          <div class="card"><p>🍝 Spagetti</p><button class="btn">Sipariş Ver</button></div>
-          <div class="card"><p>🍕 Pizza</p><button class="btn">Sipariş Ver</button></div>
-          <div class="card"><p>🥗 Salata</p><button class="btn">Sipariş Ver</button></div>
-        </div>
-      </body>
-    </html>
+    <div class="demo-site">
+      <header>Lezzet Restoranı</header>
+      <nav><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">🍝 Spagetti<br><button>Sipariş Ver</button></div>
+        <div class="card">🍕 Pizza<br><button>Sipariş Ver</button></div>
+        <div class="card">🥗 Salata<br><button>Sipariş Ver</button></div>
+      </div>
+    </div>
   `,
   template2: `
-    <html>
-      <head>
-        <style>
-          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
-          nav{display:flex;justify-content:center;gap:10px;padding:5px;background:#333;}
-          nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-          .content{padding:10px;}
-          .card{background:#111;padding:10px;border-radius:8px;margin-bottom:10px;}
-          .btn{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;}
-        </style>
-      </head>
-      <body>
-        <header>Yılmaz Hukuk</header>
-        <nav><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav>
-        <div class="content">
-          <div class="card">⚖️ İş Hukuku</div>
-          <div class="card">🏛️ Ceza Hukuku</div>
-          <div class="card">📄 Sözleşme Hazırlama</div>
-        </div>
-      </body>
-    </html>
+    <div class="demo-site">
+      <header>Yılmaz Hukuk</header>
+      <nav><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">⚖️ İş Hukuku</div>
+        <div class="card">🏛️ Ceza Hukuku</div>
+        <div class="card">📄 Sözleşme Hazırlama</div>
+      </div>
+    </div>
   `,
   template3: `
-    <html>
-      <head>
-        <style>
-          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
-          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
-          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
-        </style>
-      </head>
-      <body>
-        <header>Moda Butiği</header>
-        <div class="content">
-          <div class="card">👗 Elbise</div>
-          <div class="card">👠 Ayakkabı</div>
-          <div class="card">👜 Çanta</div>
-        </div>
-      </body>
-    </html>
+    <div class="demo-site">
+      <header>Moda Butiği</header>
+      <nav><a href="#">Ürünler</a><a href="#">Koleksiyon</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">👗 Elbise</div>
+        <div class="card">👠 Ayakkabı</div>
+        <div class="card">👜 Çanta</div>
+      </div>
+    </div>
   `,
   template4: `
-    <html>
-      <head>
-        <style>
-          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
-          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
-          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
-        </style>
-      </head>
-      <body>
-        <header>Cafe Noir</header>
-        <div class="content">
-          <div class="card">☕ Espresso</div>
-          <div class="card">🥤 Latte</div>
-          <div class="card">🍰 Kek</div>
-        </div>
-      </body>
-    </html>
+    <div class="demo-site">
+      <header>Cafe Noir</header>
+      <nav><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">☕ Espresso</div>
+        <div class="card">🥤 Latte</div>
+        <div class="card">🍰 Kek</div>
+      </div>
+    </div>
   `,
   template5: `
-    <html>
-      <head>
-        <style>
-          body{margin:0;font-family:sans-serif;background
+    <div class="demo-site">
+      <header>Özkan Danışmanlık</header>
+      <nav><a href="#">Hizmetler</a><a href="#">Projeler</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">📄 Danışmanlık 1</div>
+        <div class="card">📄 Danışmanlık 2</div>
+        <div class="card">📄 Danışmanlık 3</div>
+      </div>
+    </div>
+  `,
+  template6: `
+    <div class="demo-site">
+      <header>Tekno Mağaza</header>
+      <nav><a href="#">Ürünler</a><a href="#">Kampanyalar</a><a href="#">İletişim</a></nav>
+      <div class="cards">
+        <div class="card">💻 Laptop</div>
+        <div class="card">📱 Telefon</div>
+        <div class="card">🎧 Kulaklık</div>
+      </div>
+    </div>
+  `
+};
+
+// Buton tıklama
+document.querySelectorAll(".demo-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const templateId = btn.getAttribute("data-template");
+    demoContent.innerHTML = demoTemplates[templateId];
+    demoPopup.style.display = "flex";
+  });
+});
+
+// Kapatma
+closeBtn.addEventListener("click", ()=> demoPopup.style.display="none");
+window.addEventListener("click",(e)=>{if(e.target==demoPopup) demoPopup.style.display="none";});
+</script>
+
 
 
 
@@ -278,6 +280,7 @@ const demoTemplates = {
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
