@@ -125,42 +125,15 @@
       </div>
     </div>
   </div>
-
-  <!-- DEMO KONTEYNER -->
-  <div id="demo-container" style="display:none; margin-top:40px; padding:20px; border:2px solid #00ffff; border-radius:16px; background:#111;"></div>
-
-  <!-- TEMPLATES -->
-  <!-- Template 1 – Lezzet Restoranı -->
-  <div id="template1" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Lezzet Restoranı</h2>
-    <p>Menü, slider ve rezervasyon alanı.</p>
-  </div>
-  <!-- Template 2 – Yılmaz Hukuk -->
-  <div id="template2" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Yılmaz Hukuk</h2>
-    <p>Hizmetler, hakkımızda ve iletişim alanı.</p>
-  </div>
-  <!-- Template 3 – Moda Butiği -->
-  <div id="template3" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Moda Butiği</h2>
-    <p>Ürünler ve iletişim alanı.</p>
-  </div>
-  <!-- Template 4 – Cafe Noir -->
-  <div id="template4" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Cafe Noir</h2>
-    <p>Menü ve galeri alanı.</p>
-  </div>
-  <!-- Template 5 – Özkan Danışmanlık -->
-  <div id="template5" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Özkan Danışmanlık</h2>
-    <p>Hizmetler ve iletişim alanı.</p>
-  </div>
-  <!-- Template 6 – Tekno Mağaza -->
-  <div id="template6" class="demo-template" style="display:none;">
-    <h2 style="color:#00ffff;">Tekno Mağaza</h2>
-    <p>Ürünler ve iletişim alanı.</p>
-  </div>
 </section>
+
+<!-- POPUP MODAL -->
+<div id="demo-popup" class="demo-popup">
+  <div class="demo-popup-content">
+    <span class="close-btn">&times;</span>
+    <iframe id="demo-frame" style="width:100%; height:350px; border:none; border-radius:10px;"></iframe>
+  </div>
+</div>
 
 <!-- CSS -->
 <style>
@@ -168,26 +141,130 @@
 .project { background:#111; color:#fff; padding:20px; border-radius:12px; text-align:center; transition:.3s; position:relative; }
 .project:hover { transform:translateY(-5px); box-shadow:0 0 20px rgba(0,255,255,0.4); }
 .project-img { width:100%; border-radius:12px; margin-bottom:15px; }
-.demo-btn { background:#00ffff; color:#111; border:2px solid #00ffff; padding:10px 25px; border-radius:12px; cursor:pointer; font-weight:700; font-size:16px; position:relative; overflow:hidden; transition:.4s; }
-.demo-btn::before { content:""; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(120deg,rgba(255,255,255,0.5),rgba(255,255,255,0)); transform:skewX(-25deg); transition:.5s; }
-.demo-btn:hover::before { left:125%; }
-.demo-btn:hover { color:#00ffff; box-shadow:0 0 15px #00ffff,0 0 30px #00ffff,0 0 45px #00ffff; transform:scale(1.1); }
-#demo-container { display:none; transition:all .3s; color:#fff; }
+.demo-btn { background:#00ffff; color:#111; border:2px solid #00ffff; padding:10px 25px; border-radius:12px; cursor:pointer; font-weight:700; font-size:16px; transition:.4s; }
+.demo-btn:hover { color:#00ffff; box-shadow:0 0 15px #00ffff,0 0 30px #00ffff,0 0 45px #00ffff; transform:scale(1.05); }
+
+/* POPUP STİLİ */
+.demo-popup {
+  display:none; 
+  position:fixed; 
+  z-index:999; 
+  left:0; top:0; width:100%; height:100%; 
+  background: rgba(0,0,0,0.7);
+  justify-content:center; align-items:center;
+}
+.demo-popup-content {
+  background:#111; 
+  padding:20px; 
+  border-radius:10px; 
+  max-width:600px; 
+  width:90%;
+  color:#fff;
+  position:relative;
+}
+.close-btn {
+  position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#00ffff;
+}
 </style>
 
 <!-- JS -->
 <script>
-const demoContainer = document.getElementById("demo-container");
-document.querySelectorAll(".demo-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const templateId = btn.getAttribute("data-template");
-    const template = document.getElementById(templateId);
-    demoContainer.innerHTML = template.innerHTML;
-    demoContainer.style.display="block";
-    demoContainer.scrollIntoView({behavior:"smooth"});
-  });
-});
-</script>
+// Mini HTML demo içerikleri (iframe içine yüklenir)
+const demoTemplates = {
+  template1: `
+    <html>
+      <head>
+        <style>
+          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
+          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
+          nav{display:flex;justify-content:center;gap:10px;padding:5px;background:#333;}
+          nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
+          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
+          .btn{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;}
+        </style>
+      </head>
+      <body>
+        <header>Lezzet Restoranı</header>
+        <nav><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
+        <div class="content">
+          <div class="card"><p>🍝 Spagetti</p><button class="btn">Sipariş Ver</button></div>
+          <div class="card"><p>🍕 Pizza</p><button class="btn">Sipariş Ver</button></div>
+          <div class="card"><p>🥗 Salata</p><button class="btn">Sipariş Ver</button></div>
+        </div>
+      </body>
+    </html>
+  `,
+  template2: `
+    <html>
+      <head>
+        <style>
+          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
+          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
+          nav{display:flex;justify-content:center;gap:10px;padding:5px;background:#333;}
+          nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+          .content{padding:10px;}
+          .card{background:#111;padding:10px;border-radius:8px;margin-bottom:10px;}
+          .btn{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;}
+        </style>
+      </head>
+      <body>
+        <header>Yılmaz Hukuk</header>
+        <nav><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav>
+        <div class="content">
+          <div class="card">⚖️ İş Hukuku</div>
+          <div class="card">🏛️ Ceza Hukuku</div>
+          <div class="card">📄 Sözleşme Hazırlama</div>
+        </div>
+      </body>
+    </html>
+  `,
+  template3: `
+    <html>
+      <head>
+        <style>
+          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
+          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
+          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
+          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
+        </style>
+      </head>
+      <body>
+        <header>Moda Butiği</header>
+        <div class="content">
+          <div class="card">👗 Elbise</div>
+          <div class="card">👠 Ayakkabı</div>
+          <div class="card">👜 Çanta</div>
+        </div>
+      </body>
+    </html>
+  `,
+  template4: `
+    <html>
+      <head>
+        <style>
+          body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
+          header{background:#00ffff;padding:10px;text-align:center;font-weight:bold;color:#111;}
+          .content{padding:10px; display:flex; gap:10px; flex-wrap:wrap;}
+          .card{background:#111;padding:10px;border-radius:8px;flex:1 1 30%; text-align:center;}
+        </style>
+      </head>
+      <body>
+        <header>Cafe Noir</header>
+        <div class="content">
+          <div class="card">☕ Espresso</div>
+          <div class="card">🥤 Latte</div>
+          <div class="card">🍰 Kek</div>
+        </div>
+      </body>
+    </html>
+  `,
+  template5: `
+    <html>
+      <head>
+        <style>
+          body{margin:0;font-family:sans-serif;background
+
 
 
   </main>
@@ -201,6 +278,7 @@ document.querySelectorAll(".demo-btn").forEach(btn=>{
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
