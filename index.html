@@ -66,12 +66,11 @@
         </div>
       </div>
     </section>
-
- <section class="section">
+<section class="section">
   <h2 class="section-title">Portföy</h2>
   <div class="portfolio-grid">
     <div class="project">
-      <img src="assets/projects/project1.jpg" alt="Restoran Web Sitesi" class="project-img">
+      <img src="assets/projects/project1.jpg" alt="Lezzet Restoranı" class="project-img">
       <div class="project-info">
         <h4>Lezzet Restoranı</h4>
         <p>Restoran Web Sitesi</p>
@@ -79,7 +78,7 @@
       </div>
     </div>
     <div class="project">
-      <img src="assets/projects/project2.jpg" alt="Avukat Web Sitesi" class="project-img">
+      <img src="assets/projects/project2.jpg" alt="Yılmaz Hukuk" class="project-img">
       <div class="project-info">
         <h4>Yılmaz Hukuk</h4>
         <p>Avukat Web Sitesi</p>
@@ -87,7 +86,7 @@
       </div>
     </div>
     <div class="project">
-      <img src="assets/projects/project3.jpg" alt="Küçük İşletme" class="project-img">
+      <img src="assets/projects/project3.jpg" alt="Moda Butiği" class="project-img">
       <div class="project-info">
         <h4>Moda Butiği</h4>
         <p>Küçük İşletme</p>
@@ -95,7 +94,7 @@
       </div>
     </div>
     <div class="project">
-      <img src="assets/projects/project4.jpg" alt="Cafe Web Sitesi" class="project-img">
+      <img src="assets/projects/project4.jpg" alt="Cafe Noir" class="project-img">
       <div class="project-info">
         <h4>Cafe Noir</h4>
         <p>Restoran Web Sitesi</p>
@@ -103,7 +102,7 @@
       </div>
     </div>
     <div class="project">
-      <img src="assets/projects/project5.jpg" alt="Danışmanlık Web Sitesi" class="project-img">
+      <img src="assets/projects/project5.jpg" alt="Özkan Danışmanlık" class="project-img">
       <div class="project-info">
         <h4>Özkan Danışmanlık</h4>
         <p>Avukat Web Sitesi</p>
@@ -152,6 +151,7 @@
 .demo-site .hero p { color:#fff; }
 .demo-site .content { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
 .demo-site .card { background:#111; padding:15px; border-radius:8px; flex:1 1 30%; text-align:center; margin-bottom:10px; }
+.demo-site .card img { width:100%; border-radius:8px; margin-bottom:10px; }
 .demo-site .card button { background:#00ffff; color:#111; padding:5px 10px; border:none; border-radius:5px; cursor:pointer; margin-top:10px; }
 .demo-site footer { margin-top:20px; background:#000; padding:15px; border-radius:8px; text-align:center; color:#00ffff; }
 </style>
@@ -162,12 +162,17 @@ const demoContent = document.getElementById("demo-content");
 const closeBtn = document.querySelector(".close-btn");
 
 const demoTemplates = {
-  template1: `<div class="demo-site"><header>Lezzet Restoranı</header><nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>En Lezzetli Yemekler Burada!</h2><p>Rezervasyon yap veya menüyü incele.</p></div><div class="content"><div class="card">🍕 Pizza<br><button>Sipariş Ver</button></div><div class="card">🍝 Spagetti<br><button>Sipariş Ver</button></div><div class="card">🥗 Salata<br><button>Sipariş Ver</button></div></div><footer>© 2025 Lezzet Restoranı | Facebook | Instagram</footer></div>`,
-  template2: `<div class="demo-site"><header>Yılmaz Hukuk</header><nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav><div class="hero"><h2>Hukuki Danışmanlık</h2><p>Uzman avukatlarımızla yanınızdayız.</p></div><div class="content"><div class="card">⚖️ İş Hukuku</div><div class="card">🏛️ Ceza Hukuku</div><div class="card">📄 Sözleşme Hazırlama</div></div><footer>© 2025 Yılmaz Hukuk | Facebook | Instagram</footer></div>`,
-  template3: `<div class="demo-site"><header>Moda Butiği</header><nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Koleksiyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>Şık Tasarımlar</h2><p>Yeni sezon ürünlerimizi inceleyin.</p></div><div class="content"><div class="card">👗 Elbise</div><div class="card">👠 Ayakkabı</div><div class="card">👜 Çanta</div></div><footer>© 2025 Moda Butiği | Facebook | Instagram</footer></div>`,
-  template4: `<div class="demo-site"><header>Cafe Noir</header><nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>Kahve Keyfi</h2><p>En lezzetli kahveler ve tatlılar burada.</p></div><div class="content"><div class="card">☕ Espresso</div><div class="card">🥤 Latte</div><div class="card">🍰 Kek</div></div><footer>© 2025 Cafe Noir | Facebook | Instagram</footer></div>`,
-  template5: `<div class="demo-site"><header>Özkan Danışmanlık</header><nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Projeler</a><a href="#">İletişim</a></nav><div class="hero"><h2>Profesyonel Danışmanlık</h2><p>Projelerinizde yanınızdayız.</p></div><div class="content"><div class="card">📄 Danışmanlık 1</div><div class="card">📄 Danışmanlık 2</div><div class="card">📄 Danışmanlık 3</div></div><footer>© 2025 Özkan Danışmanlık | Facebook | Instagram</footer></div>`,
-  template6: `<div class="demo-site"><header>Tekno Mağaza</header><nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Kampanyalar</a><a href="#">İletişim</a></nav><div class="hero"><h2>Teknoloji Ürünleri</h2><p>En yeni ve kaliteli elektronik ürünler.</p></div><div class="content"><div class="card">💻 Laptop</div><div class="card">📱 Telefon</div><div class="card">🎧 Kulaklık</div></div><footer>© 2025 Tekno Mağaza | Facebook | Instagram</footer></div>`
+  template1: `<div class="demo-site"><header>Lezzet Restoranı</header><nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>En Lezzetli Yemekler Burada!</h2><p>Rezervasyon yap veya menüyü incele.</p></div><div class="content"><div class="card"><img src="assets/projects/project1.jpg"><p>Pizza</p><button>Sipariş Ver</button></div><div class="card"><img src="assets/projects/project1.jpg"><p>Spagetti</p><button>Sipariş Ver</button></div><div class="card"><img src="assets/projects/project1.jpg"><p>Salata</p><button>Sipariş Ver</button></div></div><footer>© 2025 Lezzet Restoranı | Facebook | Instagram</footer></div>`,
+
+  template2: `<div class="demo-site"><header>Yılmaz Hukuk</header><nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav><div class="hero"><h2>Hukuki Danışmanlık</h2><p>Uzman avukatlarımızla yanınızdayız.</p></div><div class="content"><div class="card"><img src="assets/projects/project2.jpg"><p>İş Hukuku</p></div><div class="card"><img src="assets/projects/project2.jpg"><p>Ceza Hukuku</p></div><div class="card"><img src="assets/projects/project2.jpg"><p>Sözleşme Hazırlama</p></div></div><footer>© 2025 Yılmaz Hukuk | Facebook | Instagram</footer></div>`,
+
+  template3: `<div class="demo-site"><header>Moda Butiği</header><nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Koleksiyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>Şık Tasarımlar</h2><p>Yeni sezon ürünlerimizi inceleyin.</p></div><div class="content"><div class="card"><img src="assets/projects/project3.jpg"><p>Elbise</p></div><div class="card"><img src="assets/projects/project3.jpg"><p>Ayakkabı</p></div><div class="card"><img src="assets/projects/project3.jpg"><p>Çanta</p></div></div><footer>© 2025 Moda Butiği | Facebook | Instagram</footer></div>`,
+
+  template4: `<div class="demo-site"><header>Cafe Noir</header><nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav><div class="hero"><h2>Kahve Keyfi</h2><p>En lezzetli kahveler ve tatlılar burada.</p></div><div class="content"><div class="card"><img src="assets/projects/project4.jpg"><p>Espresso</p></div><div class="card"><img src="assets/projects/project4.jpg"><p>Latte</p></div><div class="card"><img src="assets/projects/project4.jpg"><p>Kek</p></div></div><footer>© 2025 Cafe Noir | Facebook | Instagram</footer></div>`,
+
+  template5: `<div class="demo-site"><header>Özkan Danışmanlık</header><nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Projeler</a><a href="#">İletişim</a></nav><div class="hero"><h2>Profesyonel Danışmanlık</h2><p>Projelerinizde yanınızdayız.</p></div><div class="content"><div class="card"><img src="assets/projects/project5.jpg"><p>Danışmanlık 1</p></div><div class="card"><img src="assets/projects/project5.jpg"><p>Danışmanlık 2</p></div><div class="card"><img src="assets/projects/project5.jpg"><p>Danışmanlık 3</p></div></div><footer>© 2025 Özkan Danışmanlık | Facebook | Instagram</footer></div>`,
+
+  template6: `<div class="demo-site"><header>Tekno Mağaza</header><nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Kampanyalar</a><a href="#">İletişim</a></nav><div class="hero"><h2>Teknoloji Ürünleri</h2><p>En yeni ve kaliteli elektronik ürünler.</p></div><div class="content"><div class="card"><img src="assets/projects/project6.jpg"><p>Laptop</p></div><div class="card"><img src="assets/projects/project6.jpg"><p>Telefon</p></div><div class="card"><img src="assets/projects/project6.jpg"><p>Kulaklık</p></div></div><footer>© 2025 Tekno Mağaza | Facebook | Instagram</footer></div>`
 };
 
 document.querySelectorAll(".demo-btn").forEach(btn=>{
@@ -182,11 +187,6 @@ closeBtn.addEventListener("click", ()=> demoPopup.style.display="none");
 window.addEventListener("click",(e)=>{if(e.target==demoPopup) demoPopup.style.display="none";});
 </script>
 
-
-
-
-
-
   </main>
 
   <footer>
@@ -198,6 +198,7 @@ window.addEventListener("click",(e)=>{if(e.target==demoPopup) demoPopup.style.di
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
