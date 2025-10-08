@@ -151,26 +151,28 @@ const templates = {
   template1: `
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lezzet Restoranı</title>
-  <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  .card button{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    .card button{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Lezzet Restoranı</header>
   <nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>En Lezzetli Yemekler Burada!</h2><p>Rezervasyon yap veya menüyü incele.</p></div>
   <div class="content">
-    <div class="card"><div> Pizza </div><p>Pizza</p><button>Sipariş Ver</button></div>
-    <div class="card"><div> Spagetti </div><p>Spagetti</p><button>Sipariş Ver</button></div>
-    <div class="card"><div> Salata </div><p>Salata</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project1.jpg" alt="Pizza"><p>Pizza</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project1.jpg" alt="Spagetti"><p>Spagetti</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project1.jpg" alt="Salata"><p>Salata</p><button>Sipariş Ver</button></div>
   </div>
   <footer>© 2025 Lezzet Restoranı | Facebook | Instagram</footer>
   </body></html>`,
@@ -179,24 +181,25 @@ const templates = {
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yılmaz Hukuk</title>
   <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Yılmaz Hukuk</header>
   <nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Davalar</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>Hukuki Danışmanlık</h2><p>Uzman avukatlarımızla yanınızdayız.</p></div>
   <div class="content">
-    <div class="card"><div> İş Hukuku </div><p>İş Hukuku</p></div>
-    <div class="card"><div> Ceza Hukuku </div><p>Ceza Hukuku</p></div>
-    <div class="card"><div> Sözleşme </div><p>Sözleşme Hazırlama</p></div>
+    <div class="card"><img src="assets/projects/project2.jpg" alt="İş Hukuku"><p>İş Hukuku</p></div>
+    <div class="card"><img src="assets/projects/project2.jpg" alt="Ceza Hukuku"><p>Ceza Hukuku</p></div>
+    <div class="card"><img src="assets/projects/project2.jpg" alt="Sözleşme"><p>Sözleşme Hazırlama</p></div>
   </div>
   <footer>© 2025 Yılmaz Hukuk | Facebook | Instagram</footer>
   </body></html>`,
@@ -205,24 +208,25 @@ const templates = {
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moda Butiği</title>
   <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Moda Butiği</header>
   <nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Koleksiyon</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>Şık Tasarımlar</h2><p>Yeni sezon ürünlerimizi inceleyin.</p></div>
   <div class="content">
-    <div class="card"><div> Elbise </div><p>Elbise</p></div>
-    <div class="card"><div> Ayakkabı </div><p>Ayakkabı</p></div>
-    <div class="card"><div> Çanta </div><p>Çanta</p></div>
+    <div class="card"><img src="assets/projects/project3.jpg" alt="Elbise"><p>Elbise</p></div>
+    <div class="card"><img src="assets/projects/project3.jpg" alt="Ayakkabı"><p>Ayakkabı</p></div>
+    <div class="card"><img src="assets/projects/project3.jpg" alt="Çanta"><p>Çanta</p></div>
   </div>
   <footer>© 2025 Moda Butiği | Facebook | Instagram</footer>
   </body></html>`,
@@ -231,25 +235,25 @@ const templates = {
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cafe Noir</title>
   <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  .card button{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Cafe Noir</header>
   <nav><a href="#">Anasayfa</a><a href="#">Menü</a><a href="#">Rezervasyon</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>Premium Kahve Deneyimi</h2><p>En iyi kahveleri burada tadın.</p></div>
   <div class="content">
-    <div class="card"><div> Espresso </div><p>Espresso</p><button>Sipariş Ver</button></div>
-    <div class="card"><div> Latte </div><p>Latte</p><button>Sipariş Ver</button></div>
-    <div class="card"><div> Pastane </div><p>Pastane Ürünleri</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project4.jpg" alt="Espresso"><p>Espresso</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project4.jpg" alt="Latte"><p>Latte</p><button>Sipariş Ver</button></div>
+    <div class="card"><img src="assets/projects/project4.jpg" alt="Pastane"><p>Pastane Ürünleri</p><button>Sipariş Ver</button></div>
   </div>
   <footer>© 2025 Cafe Noir | Facebook | Instagram</footer>
   </body></html>`,
@@ -258,24 +262,25 @@ const templates = {
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Özkan Danışmanlık</title>
   <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Özkan Danışmanlık</header>
   <nav><a href="#">Anasayfa</a><a href="#">Hizmetler</a><a href="#">Danışmanlık</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>Profesyonel Danışmanlık</h2><p>İş ve hukuk alanında uzman ekibimiz.</p></div>
   <div class="content">
-    <div class="card"><div> Vergi </div><p>Vergi Danışmanlığı</p></div>
-    <div class="card"><div> İş </div><p>İş Hukuku</p></div>
-    <div class="card"><div> Sözleşme </div><p>Sözleşme Hazırlama</p></div>
+    <div class="card"><img src="assets/projects/project5.jpg" alt="Vergi"><p>Vergi Danışmanlığı</p></div>
+    <div class="card"><img src="assets/projects/project5.jpg" alt="İş"><p>İş Hukuku</p></div>
+    <div class="card"><img src="assets/projects/project5.jpg" alt="Sözleşme"><p>Sözleşme Hazırlama</p></div>
   </div>
   <footer>© 2025 Özkan Danışmanlık | Facebook | Instagram</footer>
   </body></html>`,
@@ -284,59 +289,24 @@ const templates = {
   <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tekno Mağaza</title>
   <style>body{margin:0;font-family:sans-serif;background:#222;color:#fff;}
-  header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
-  nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
-  nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
-  .hero{background:#333;padding:40px;text-align:center;}
-  .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
-  .hero p{color:#fff;}
-  .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
-  .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
-  .card img{width:100%;border-radius:8px;margin-bottom:10px;background:#333;color:#666;display:flex;align-items:center;justify-content:center;height:150px;}
-  .card button{background:#00ffff;color:#111;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
-  footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}</style>
+    header{background:#00ffff;color:#111;text-align:center;padding:20px;font-size:28px;font-weight:bold;}
+    nav{display:flex;justify-content:center;gap:20px;background:#111;padding:10px;}
+    nav a{color:#00ffff;text-decoration:none;font-weight:bold;}
+    .hero{background:#333;padding:40px;text-align:center;}
+    .hero h2{color:#00ffff;font-size:28px;margin-bottom:10px;}
+    .hero p{color:#fff;}
+    .content{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px;}
+    .card{background:#111;padding:15px;border-radius:8px;flex:1 1 250px;text-align:center;}
+    .card img{width:100%;border-radius:8px;margin-bottom:10px;}
+    footer{margin-top:20px;background:#000;padding:15px;text-align:center;color:#00ffff;}
+  </style>
   </head><body>
   <header>Tekno Mağaza</header>
   <nav><a href="#">Anasayfa</a><a href="#">Ürünler</a><a href="#">Kampanyalar</a><a href="#">İletişim</a></nav>
   <div class="hero"><h2>En Yeni Teknoloji Ürünleri</h2><p>Güncel ürünler ve fırsatlar.</p></div>
   <div class="content">
-    <div class="card"><div> Telefon </div><p>Akıllı Telefon</p><button>Satın Al</button></div>
-    <div class="card"><div> Laptop </div><p>Laptop</p><button>Satın Al</button></div>
-    <div class="card"><div> Tablet </div><p>Tablet</p><button>Satın Al</button></div>
-  </div>
-  <footer>© 2025 Tekno Mağaza | Facebook | Instagram</footer>
-  </body></html>`
-};
+    <div class="card"><img src="assets/projects/project6.jpg"
 
-// Buton tıklama olayları
-demoBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const templateKey = btn.getAttribute('data-template');
-    const templateHtml = templates[templateKey];
-    
-    // Blob URL oluşturarak iframe'de göster
-    const blob = new Blob([templateHtml], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    
-    demoFrame.src = url;
-    demoPopup.style.display = 'flex';
-  });
-});
-
-// Kapatma butonu
-closeBtn.addEventListener('click', () => {
-  demoPopup.style.display = 'none';
-  demoFrame.src = '';
-});
-
-// Popup dışına tıklama ile kapatma
-demoPopup.addEventListener('click', (e) => {
-  if (e.target === demoPopup) {
-    demoPopup.style.display = 'none';
-    demoFrame.src = '';
-  }
-});
-</script>
 
   </main>
 
@@ -349,6 +319,7 @@ demoPopup.addEventListener('click', (e) => {
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
