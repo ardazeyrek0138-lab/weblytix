@@ -121,11 +121,11 @@
   </div>
 </section>
 
-<!-- POPUP -->
-<div id="demo-popup" class="demo-popup">
-  <div class="demo-popup-content">
+<!-- DEMO MODAL -->
+<div id="demo-modal" class="demo-modal">
+  <div class="demo-modal-content">
     <span class="close-btn">&times;</span>
-    <iframe id="demo-frame" src="" frameborder="0"></iframe>
+    <div id="demo-content"></div>
   </div>
 </div>
 
@@ -136,1479 +136,374 @@
 .project-img { width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:15px; }
 .demo-btn { background:#00ffff; color:#111; border:none; padding:10px 25px; border-radius:12px; cursor:pointer; font-weight:700; transition: background 0.3s ease; }
 .demo-btn:hover { background:#00ccff; }
-.demo-popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:999; }
-.demo-popup-content { position:relative; width:90%; max-width:1000px; height:90%; background:#111; border-radius:12px; padding:10px; }
+.demo-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:999; }
+.demo-modal-content { position:relative; width:90%; max-width:1000px; max-height:90vh; background:#111; border-radius:12px; padding:10px; overflow:auto; }
 .close-btn { position:absolute; top:10px; right:15px; font-size:28px; cursor:pointer; color:#00ffff; z-index:10; transition: color 0.3s ease; }
 .close-btn:hover { color:#00ccff; }
-#demo-frame { width:100%; height:100%; border:none; border-radius:8px; }
 </style>
 
 <script>
-// Popup ve iframe ayarları
-const demoPopup = document.getElementById('demo-popup');
-const demoFrame = document.getElementById('demo-frame');
+// Modal ve içerik ayarları
+const demoModal = document.getElementById('demo-modal');
+const demoContent = document.getElementById('demo-content');
 const closeBtn = document.querySelector('.close-btn');
 const demoBtns = document.querySelectorAll('.demo-btn');
 
 const templates = {
   template1: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lezzet Restoranı - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(45deg, #00ffff, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-    
-    .nav-links a:hover {
-      color: #00ffff;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #00ffff;
-      transition: width 0.3s ease;
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/pizza.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #00ffff, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #00ffff, #00ccff);
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
-    }
-    
-    .menu-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      background: linear-gradient(45deg, #00ffff, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .menu-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .menu-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-    
-    .menu-image {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-    }
-    
-    .menu-content {
-      padding: 1.5rem;
-    }
-    
-    .menu-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #00ffff;
-    }
-    
-    .menu-content p {
-      color: #ccc;
-      margin-bottom: 1rem;
-    }
-    
-    .price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #00ccff;
-    }
-    
-    .order-btn {
-      display: block;
-      width: 100%;
-      background: linear-gradient(45deg, #00ffff, #00ccff);
-      color: #111;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .order-btn:hover {
-      transform: scale(1.02);
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    
-    .social-links a {
-      color: #00ffff;
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .social-links a:hover {
-      transform: translateY(-3px);
-    }
-    
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .nav-links { gap: 1rem; }
-      .menu-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Lezzet Restoranı</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Menü</a>
-        <a href="#">Rezervasyon</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Lezzet Restoranı</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Menü</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Rezervasyon</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>En Lezzetli Yemekler Burada!</h1>
-        <p>Rezervasyon yap veya menüyü incele.</p>
-        <a href="#" class="cta-button">Rezervasyon Yap</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/pizza.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">En Lezzetli Yemekler Burada!</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Rezervasyon yap veya menüyü incele.</p>
+        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Rezervasyon Yap</a>
       </div>
     </section>
     
-    <section class="menu-section">
-      <h2 class="section-title">Menümüz</h2>
-      <div class="menu-grid">
-        <div class="menu-item">
-          <img src="assets/projects/pizza.jpg" alt="Pizza" class="menu-image">
-          <div class="menu-content">
-            <h3>Pizza Margherita</h3>
-            <p>Taze domates, mozarella peyniri ve fesleğen</p>
-            <div class="price">₺85</div>
-            <button class="order-btn">Sipariş Ver</button>
+    <section class="menu-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Menümüz</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/pizza.jpg" alt="Pizza" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Pizza Margherita</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Taze domates, mozarella peyniri ve fesleğen</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺85</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
-        <div class="menu-item">
-          <img src="assets/projects/Spaghetti.jpg" alt="Spagetti" class="menu-image">
-          <div class="menu-content">
-            <h3>Spagetti Carbonara</h3>
-            <p>Kremalı sos, pancetta ve parmesan peyniri</p>
-            <div class="price">₺75</div>
-            <button class="order-btn">Sipariş Ver</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/Spaghetti.jpg" alt="Spagetti" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Spagetti Carbonara</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Kremalı sos, pancetta ve parmesan peyniri</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺75</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
-        <div class="menu-item">
-          <img src="assets/projects/salata.jpg" alt="Salata" class="menu-image">
-          <div class="menu-content">
-            <h3>Çeşitli Salata</h3>
-            <p>Taze sebzeler, zeytinyağlı sos ve ceviz</p>
-            <div class="price">₺45</div>
-            <button class="order-btn">Sipariş Ver</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/salata.jpg" alt="Salata" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Çeşitli Salata</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Taze sebzeler, zeytinyağlı sos ve ceviz</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺45</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
       </div>
     </section>
     
-    <footer>
-      <div class="footer-content">
-        <p>© 2025 Lezzet Restoranı. Tüm hakları saklıdır.</p>
-        <div class="social-links">
-          <a href="#" title="Facebook">📱</a>
-          <a href="#" title="Instagram">📷</a>
-          <a href="#" title="Twitter">🐦</a>
-        </div>
-        <p>Bizimle iletişime geçin: info@lezzetrestorani.com</p>
-      </div>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
+      <p>© 2025 Lezzet Restoranı. Tüm hakları saklıdır.</p>
+      <p>Bizimle iletişime geçin: info@lezzetrestorani.com</p>
     </footer>
-  </body></html>`,
+  `,
 
   template2: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yılmaz Hukuk - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-      color: #fff;
-      line-height: 1.6;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #4ade80;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: #4ade80;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/telefon.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: #4ade80;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: #4ade80;
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-    }
-    
-    .services-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #4ade80;
-    }
-    
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .service-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .service-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: #4ade80;
-    }
-    
-    .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #4ade80;
-    }
-    
-    .service-card p {
-      color: #ccc;
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Yılmaz Hukuk</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Hizmetler</a>
-        <a href="#">Ekibimiz</a>
-        <a href="#">Davalar</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#4ade80;">Yılmaz Hukuk</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hizmetler</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ekibimiz</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Davalar</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Hukuki Danışmanlık</h1>
-        <p>Uzman avukatlarımızla her daim yanınızdayız. Haklarınızı korumak için buradayız.</p>
-        <a href="#" class="cta-button">Danışmanlık Al</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/telefon.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#4ade80;">Hukuki Danışmanlık</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Uzman avukatlarımızla her daim yanınızdayız. Haklarınızı korumak için buradayız.</p>
+        <a href="#" style="display:inline-block;background:#4ade80;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Danışmanlık Al</a>
       </div>
     </section>
     
-    <section class="services-section">
-      <h2 class="section-title">Hizmetlerimiz</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">⚖️</div>
-          <h3>İş Hukuku</h3>
-          <p>Şirketler arası anlaşmazlıklar, işçi-işveren ilişkileri ve ticari hukuk konularında uzman ekibimiz.</p>
+    <section class="services-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#4ade80;">Hizmetlerimiz</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">⚖️</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">İş Hukuku</h3>
+          <p style="color:#ccc;">Şirketler arası anlaşmazlıklar, işçi-işveren ilişkileri ve ticari hukuk konularında uzman ekibimiz.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🔒</div>
-          <h3>Ceza Hukuku</h3>
-          <p>Savunma, kefalet başvuruları ve ceza mahkemelerinde temsil hizmeti sunuyoruz.</p>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">🔒</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">Ceza Hukuku</h3>
+          <p style="color:#ccc;">Savunma, kefalet başvuruları ve ceza mahkemelerinde temsil hizmeti sunuyoruz.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">📝</div>
-          <h3>Sözleşme Hazırlama</h3>
-          <p>Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">📝</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">Sözleşme Hazırlama</h3>
+          <p style="color:#ccc;">Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
         </div>
       </div>
     </section>
     
-    <footer>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
       <p>© 2025 Yılmaz Hukuk. Tüm hakları saklıdır.</p>
       <p>Bizimle iletişime geçin: info@yilmazhukuk.com</p>
     </footer>
-  </body></html>`,
+  `,
 
   template3: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moda Butiği - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #fff;
-      line-height: 1.6;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(45deg, #ff6b6b, #ffa500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: #ff6b6b;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/elbise.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #ff6b6b, #ffa500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff6b6b, #ffa500);
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-    }
-    
-    .products-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      background: linear-gradient(45deg, #ff6b6b, #ffa500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .product-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .product-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .product-image {
-      height: 300px;
-      width: 100%;
-      object-fit: cover;
-    }
-    
-    .product-content {
-      padding: 1.5rem;
-      text-align: center;
-    }
-    
-    .product-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #ff6b6b;
-    }
-    
-    .product-content p {
-      color: #ccc;
-      margin-bottom: 1rem;
-    }
-    
-    .price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #ffa500;
-    }
-    
-    .buy-btn {
-      display: block;
-      width: 100%;
-      background: linear-gradient(45deg, #ff6b6b, #ffa500);
-      color: #111;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .buy-btn:hover {
-      transform: scale(1.02);
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Moda Butiği</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Ürünler</a>
-        <a href="#">Koleksiyon</a>
-        <a href="#">Hakkımızda</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Moda Butiği</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ürünler</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Koleksiyon</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Şık Tasarımlar</h1>
-        <p>Yeni sezon ürünlerimizle tarzınızı keşfedin ve kendinizi ifade edin.</p>
-        <a href="#" class="cta-button">Koleksiyonu Gör</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/elbise.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Şık Tasarımlar</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Yeni sezon ürünlerimizle tarzınızı keşfedin ve kendinizi ifade edin.</p>
+        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Koleksiyonu Gör</a>
       </div>
     </section>
     
-    <section class="products-section">
-      <h2 class="section-title">Yeni Ürünler</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <img src="assets/projects/elbise.jpg" alt="Elbise" class="product-image">
-          <div class="product-content">
-            <h3>Yazlık Elbise</h3>
-            <p>Hafif ve şık yazlık elbise</p>
-            <div class="price">₺450</div>
-            <button class="buy-btn">Satın Al</button>
+    <section class="products-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Yeni Ürünler</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/elbise.jpg" alt="Elbise" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Yazlık Elbise</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Hafif ve şık yazlık elbise</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺450</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
-        <div class="product-card">
-          <img src="assets/projects/ayakkabi.jpg" alt="Ayakkabı" class="product-image">
-          <div class="product-content">
-            <h3>Deri Ayakkabı</h3>
-            <p>Rahat ve şık deri ayakkabı</p>
-            <div class="price">₺850</div>
-            <button class="buy-btn">Satın Al</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/ayakkabı.jpg" alt="Ayakkabı" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Deri Ayakkabı</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Rahat ve şık deri ayakkabı</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺850</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
-        <div class="product-card">
-          <img src="assets/projects/canta.jpg" alt="Çanta" class="product-image">
-          <div class="product-content">
-            <h3>Deri Çanta</h3>
-            <p>Elegant deri el çantası</p>
-            <div class="price">₺650</div>
-            <button class="buy-btn">Satın Al</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/canta.jpg" alt="Çanta" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Deri Çanta</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Elegant deri el çantası</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺650</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
       </div>
     </section>
     
-    <footer>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
       <p>© 2025 Moda Butiği. Tüm hakları saklıdır.</p>
       <p>Bizimle iletişime geçin: info@modabutigi.com</p>
     </footer>
-  </body></html>`,
+  `,
 
   template4: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cafe Noir - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #2c071d 0%, #1a1a2e 100%);
-      color: #fff;
-      line-height: 1.6;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #fbbf24;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: #fbbf24;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/latte.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(44, 7, 29, 0.7), rgba(26, 26, 46, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: #fbbf24;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: #fbbf24;
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-    }
-    
-    .menu-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #fbbf24;
-    }
-    
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .menu-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .menu-item:hover {
-      transform: translateY(-10px);
-    }
-    
-    .menu-image {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-    }
-    
-    .menu-content {
-      padding: 1.5rem;
-    }
-    
-    .menu-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #fbbf24;
-    }
-    
-    .menu-content p {
-      color: #ccc;
-      margin-bottom: 1rem;
-    }
-    
-    .price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fcd34d;
-    }
-    
-    .order-btn {
-      display: block;
-      width: 100%;
-      background: #fbbf24;
-      color: #111;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .order-btn:hover {
-      transform: scale(1.02);
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Cafe Noir</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Menü</a>
-        <a href="#">Rezervasyon</a>
-        <a href="#">Hakkımızda</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#fbbf24;">Cafe Noir</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Menü</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Rezervasyon</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Premium Kahve Deneyimi</h1>
-        <p>En iyi kahveleri, pastaları ve atmosferi burada tadın.</p>
-        <a href="#" class="cta-button">Rezervasyon Yap</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/latte.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(44, 7, 29, 0.7), rgba(26, 26, 46, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#fbbf24;">Premium Kahve Deneyimi</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">En iyi kahveleri, pastaları ve atmosferi burada tadın.</p>
+        <a href="#" style="display:inline-block;background:#fbbf24;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Rezervasyon Yap</a>
       </div>
     </section>
     
-    <section class="menu-section">
-      <h2 class="section-title">Menümüz</h2>
-      <div class="menu-grid">
-        <div class="menu-item">
-          <img src="assets/projects/Espresso.jpg" alt="Espresso" class="menu-image">
-          <div class="menu-content">
-            <h3>Double Espresso</h3>
-            <p>Çift doz kahve çekirdekleriyle hazırlanmış yoğun espresso</p>
-            <div class="price">₺45</div>
-            <button class="order-btn">Sipariş Ver</button>
+    <section class="menu-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#fbbf24;">Menümüz</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/Espresso.jpg" alt="Espresso" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Double Espresso</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Çift doz kahve çekirdekleriyle hazırlanmış yoğun espresso</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺45</div>
+            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
-        <div class="menu-item">
-          <img src="assets/projects/latte.jpg" alt="Latte" class="menu-image">
-          <div class="menu-content">
-            <h3>Vanilla Latte</h3>
-            <p>Vanilyalı süt ve espresso karışımı</p>
-            <div class="price">₺55</div>
-            <button class="order-btn">Sipariş Ver</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/latte.jpg" alt="Latte" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Vanilla Latte</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Vanilyalı süt ve espresso karışımı</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺55</div>
+            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
-        <div class="menu-item">
-          <img src="assets/projects/pasta.jpg" alt="Pastane" class="menu-image">
-          <div class="menu-content">
-            <h3>Çikolatalı Pasta</h3>
-            <p>Ev yapımı çikolatalı kek ve krema</p>
-            <div class="price">₺65</div>
-            <button class="order-btn">Sipariş Ver</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/pasta.jpg" alt="Pastane" style="height:200px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Çikolatalı Pasta</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Ev yapımı çikolatalı kek ve krema</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺65</div>
+            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
           </div>
         </div>
       </div>
     </section>
     
-    <footer>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
       <p>© 2025 Cafe Noir. Tüm hakları saklıdır.</p>
       <p>Bizimle iletişime geçin: info@cafenoir.com</p>
     </footer>
-  </body></html>`,
+  `,
 
   template5: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Özkan Danışmanlık - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-      color: #fff;
-      line-height: 1.6;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #3b82f6;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: #3b82f6;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/laptop.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: #3b82f6;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: #3b82f6;
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-    }
-    
-    .services-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #3b82f6;
-    }
-    
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .service-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .service-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: #3b82f6;
-    }
-    
-    .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #3b82f6;
-    }
-    
-    .service-card p {
-      color: #ccc;
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Özkan Danışmanlık</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Hizmetler</a>
-        <a href="#">Danışmanlık</a>
-        <a href="#">Referanslar</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#3b82f6;">Özkan Danışmanlık</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hizmetler</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Danışmanlık</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Referanslar</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Profesyonel Danışmanlık</h1>
-        <p>İş ve hukuk alanında uzman ekibimizle her daim yanınızdayız.</p>
-        <a href="#" class="cta-button">Danışmanlık Al</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/laptop.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#3b82f6;">Profesyonel Danışmanlık</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">İş ve hukuk alanında uzman ekibimizle her daim yanınızdayız.</p>
+        <a href="#" style="display:inline-block;background:#3b82f6;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Danışmanlık Al</a>
       </div>
     </section>
     
-    <section class="services-section">
-      <h2 class="section-title">Hizmetlerimiz</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">📊</div>
-          <h3>Vergi Danışmanlığı</h3>
-          <p>Kurumsal ve bireysel vergi planlaması, beyanname hazırlama ve denetim hizmetleri.</p>
+    <section class="services-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#3b82f6;">Hizmetlerimiz</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">📊</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">Vergi Danışmanlığı</h3>
+          <p style="color:#ccc;">Kurumsal ve bireysel vergi planlaması, beyanname hazırlama ve denetim hizmetleri.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">⚖️</div>
-          <h3>İş Hukuku</h3>
-          <p>Şirket kurulumu, sözleşmeler, iş anlaşmazlıkları ve ticari hukuk konularında destek.</p>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">⚖️</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">İş Hukuku</h3>
+          <p style="color:#ccc;">Şirket kurulumu, sözleşmeler, iş anlaşmazlıkları ve ticari hukuk konularında destek.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">📝</div>
-          <h3>Sözleşme Hazırlama</h3>
-          <p>Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
+          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">📝</div>
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">Sözleşme Hazırlama</h3>
+          <p style="color:#ccc;">Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
         </div>
       </div>
     </section>
     
-    <footer>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
       <p>© 2025 Özkan Danışmanlık. Tüm hakları saklıdır.</p>
       <p>Bizimle iletişime geçin: info@ozkandansmanlik.com</p>
     </footer>
-  </body></html>`,
+  `,
 
   template6: `
-  <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tekno Mağaza - Profesyonel Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #fff;
-      line-height: 1.6;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(45deg, #8b5cf6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: #8b5cf6;
-    }
-    
-    .hero {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: url('assets/projects/tablet.jpg') center/cover no-repeat;
-      position: relative;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #8b5cf6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #8b5cf6, #ec4899);
-      color: #111;
-      padding: 12px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-    }
-    
-    .products-section {
-      padding: 5rem 2rem;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      background: linear-gradient(45deg, #8b5cf6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .product-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .product-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .product-image {
-      height: 300px;
-      width: 100%;
-      object-fit: cover;
-    }
-    
-    .product-content {
-      padding: 1.5rem;
-      text-align: center;
-    }
-    
-    .product-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #8b5cf6;
-    }
-    
-    .product-content p {
-      color: #ccc;
-      margin-bottom: 1rem;
-    }
-    
-    .price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #ec4899;
-    }
-    
-    .buy-btn {
-      display: block;
-      width: 100%;
-      background: linear-gradient(45deg, #8b5cf6, #ec4899);
-      color: #111;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .buy-btn:hover {
-      transform: scale(1.02);
-    }
-    
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #ccc;
-    }
-  </style>
-  </head><body>
-    <nav class="navbar">
-      <div class="logo">Tekno Mağaza</div>
-      <div class="nav-links">
-        <a href="#">Anasayfa</a>
-        <a href="#">Ürünler</a>
-        <a href="#">Kampanyalar</a>
-        <a href="#">Hakkımızda</a>
-        <a href="#">İletişim</a>
+    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
+      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Tekno Mağaza</div>
+      <div class="nav-links" style="display:flex;gap:2rem;">
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ürünler</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Kampanyalar</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
+        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
       </div>
     </nav>
     
-    <section class="hero">
-      <div class="hero-content">
-        <h1>En Yeni Teknoloji Ürünleri</h1>
-        <p>Güncel ürünler ve fırsatlarla teknoloji dünyasına adım atın.</p>
-        <a href="#" class="cta-button">Ürünleri Gör</a>
+    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/tablet.jpg') center/cover no-repeat;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
+      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
+        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">En Yeni Teknoloji Ürünleri</h1>
+        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Güncel ürünler ve fırsatlarla teknoloji dünyasına adım atın.</p>
+        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Ürünleri Gör</a>
       </div>
     </section>
     
-    <section class="products-section">
-      <h2 class="section-title">Popüler Ürünler</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <img src="assets/projects/telefon.jpg" alt="Telefon" class="product-image">
-          <div class="product-content">
-            <h3>Akıllı Telefon</h3>
-            <p>En yeni nesil akıllı telefon</p>
-            <div class="price">₺12.500</div>
-            <button class="buy-btn">Satın Al</button>
+    <section class="products-section" style="padding:5rem 2rem;">
+      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Popüler Ürünler</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/telefon.jpg" alt="Telefon" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Akıllı Telefon</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">En yeni nesil akıllı telefon</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺12.500</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
-        <div class="product-card">
-          <img src="assets/projects/laptop.jpg" alt="Laptop" class="product-image">
-          <div class="product-content">
-            <h3>Gaming Laptop</h3>
-            <p>Yüksek performanslı oyun laptopu</p>
-            <div class="price">₺25.000</div>
-            <button class="buy-btn">Satın Al</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/laptop.jpg" alt="Laptop" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Gaming Laptop</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Yüksek performanslı oyun laptopu</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺25.000</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
-        <div class="product-card">
-          <img src="assets/projects/tablet.jpg" alt="Tablet" class="product-image">
-          <div class="product-content">
-            <h3>Pro Tablet</h3>
-            <p>Profesyonel kullanım için tablet</p>
-            <div class="price">₺8.500</div>
-            <button class="buy-btn">Satın Al</button>
+        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
+          <img src="assets/projects/tablet.jpg" alt="Tablet" style="height:300px;width:100%;object-fit:cover;">
+          <div style="padding:1.5rem;text-align:center;">
+            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Pro Tablet</h3>
+            <p style="color:#ccc;margin-bottom:1rem;">Profesyonel kullanım için tablet</p>
+            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺8.500</div>
+            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
           </div>
         </div>
       </div>
     </section>
     
-    <footer>
+    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
       <p>© 2025 Tekno Mağaza. Tüm hakları saklıdır.</p>
       <p>Bizimle iletişime geçin: info@teknomagaza.com</p>
     </footer>
-  </body></html>`
+  `
 };
 
 // Buton tıklama olayları
 demoBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const templateKey = btn.getAttribute('data-template');
-    const templateHtml = templates[templateKey];
-    
-    // Blob URL oluşturarak iframe'de göster
-    const blob = new Blob([templateHtml], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    
-    demoFrame.src = url;
-    demoPopup.style.display = 'flex';
+    demoContent.innerHTML = templates[templateKey];
+    demoModal.style.display = 'flex';
   });
 });
 
 // Kapatma butonu
 closeBtn.addEventListener('click', () => {
-  demoPopup.style.display = 'none';
-  demoFrame.src = '';
+  demoModal.style.display = 'none';
 });
 
-// Popup dışına tıklama ile kapatma
-demoPopup.addEventListener('click', (e) => {
-  if (e.target === demoPopup) {
-    demoPopup.style.display = 'none';
-    demoFrame.src = '';
+// Modal dışına tıklama ile kapatma
+demoModal.addEventListener('click', (e) => {
+  if (e.target === demoModal) {
+    demoModal.style.display = 'none';
   }
 });
 </script>
@@ -1623,6 +518,7 @@ demoPopup.addEventListener('click', (e) => {
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
