@@ -1,539 +1,547 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weblytix – Profesyonel Web Tasarımcısı</title>
-  <meta name="description" content="Modern, hızlı ve satış odaklı web tasarımları. Küçük işletmeler için özel çözümler.">
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NDRKKMY37"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9NDRKKMY37');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weblytix Cumhuriyet Animasyonu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        #matrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        #flagContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #turkeyFlag {
+            max-width: 90%;
+            max-height: 70%;
+            filter: drop-shadow(0 0 10px #ff0000);
+            animation: flagGlow 2s infinite alternate;
+        }
+        
+        #sloganText {
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px #ffffff;
+            margin-top: 20px;
+            animation: sloganPulse 2s infinite alternate;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        #logoFinal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        #weblytixLogo {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 15px #00e0ff);
+            animation: logoGlow 2s infinite alternate;
+        }
+        
+        #congratsText {
+            color: #00e0ff;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px #00e0ff;
+            margin-bottom: 15px;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        #ataturkQuote1 {
+            color: #00e0ff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00e0ff;
+            margin-bottom: 10px;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        #ataturkQuote2 {
+            color: #00e0ff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00e0ff;
+            margin-bottom: 15px;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        #ataturkName {
+            color: #00e0ff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00e0ff;
+            margin-bottom: 20px;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        #copyrightText {
+            color: #00e0ff;
+            font-size: 0.9rem;
+            text-shadow: 0 0 10px #00e0ff;
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        .terminal-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00e0ff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00e0ff;
+            z-index: 4;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            opacity: 0;
+        }
+        
+        #audioElement {
+            display: none;
+        }
+        
+        @keyframes flagGlow {
+            0% { filter: drop-shadow(0 0 10px #ff0000); }
+            100% { filter: drop-shadow(0 0 25px #ff0000); }
+        }
+        
+        @keyframes sloganPulse {
+            0% { text-shadow: 0 0 15px #ffffff; opacity: 0.8; }
+            100% { text-shadow: 0 0 30px #ffffff; opacity: 1; }
+        }
+        
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 15px #00e0ff); }
+            100% { filter: drop-shadow(0 0 30px #00e0ff); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 15px #00e0ff; }
+            100% { text-shadow: 0 0 30px #00e0ff; }
+        }
+        
+        @keyframes moonStarPulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo-container">
-        <img src="weblytix.logo.png" alt="Weblytix Logo" class="logo">
-        <span class="logo-text">Weblytix</span>
-      </div>
-      <nav id="mainNav">
-        <a href="index.html">Ana Sayfa</a>
-        <a href="hakkimizda.html">Hakkımda</a>
-        <a href="hizmetler.html">Hizmetler</a>
-        <a href="iletisim.html">İletişim</a>
-      </nav>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menüyü aç">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <canvas id="matrixCanvas"></canvas>
+    <div class="terminal-text" id="terminalText"></div>
+    
+    <div id="flagContainer">
+        <svg id="turkeyFlag" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 800">
+            <style type="text/css">
+                .st0{clip-path:url(#SVGID_2_);fill:#E30A17;}
+                .st1{clip-path:url(#SVGID_2_);}
+                .st2{fill:#FFFFFF; animation: moonStarPulse 1.5s infinite alternate;}
+                .st3{fill:#E30A17;}
+                .st4{font-family:'Arial-BoldMT';}
+                .st5{font-size:18px;}
+            </style>
+            <g>
+                <defs>
+                    <polygon id="SVGID_1_" points="1123.7,474 1123.3,462.9 1120.6,460.9 1123,454.5 1117.1,450.3 1116.9,450.2 1113.8,451.6 
+                        1108.9,445.9 1105.1,444.4 1099.5,445.1 1098.7,443.6 1099.1,439.1 1105.4,425.1 1105.4,425 1105.2,417.5 1109.5,411.4 
+                        1106.8,407.3 1099.2,407.9 1097.4,390.6 1094.1,388.3 1094.2,374.8 1089,372 1085.2,365.1 1087,361.9 1086.4,353.5 1079.6,350.3 
+                        1076.7,340.8 1076.9,340.8 1076.5,340.4 1076.5,340.3 1076.4,340.3 1074.6,338.3 1076.7,336.3 1084.2,334.6 1088.5,336.3 
+                        1094.1,333.9 1096,331.3 1095.5,320.9 1097,316.3 1097.2,316.3 1097.2,315.8 1097.3,315.5 1097.1,315.5 1096.7,311.9 
+                        1101.7,306.5 1117.3,314.2 1113.2,307.5 1108,302.6 1100.9,298 1094.1,291.5 1085.7,287.9 1081.4,287.8 1069.2,291.9 
+                        1062.5,291.6 1048.2,287.1 1047.2,285.4 1050.7,282.8 1047.1,275.8 1042,270.6 1043.2,265 1039.5,262.2 1043.5,257.4 1046.6,246 
+                        1044.6,238.5 1037.1,225.9 1037,225.8 1028.6,222.4 1026.8,216.9 1026.9,216.9 1026.2,212.8 1019.3,210.9 1014.5,212.9 
+                        1010.7,208.3 1007.6,208.3 1011.5,204.7 1000.3,199.3 991.7,191.3 989.9,193.6 986.8,192 989.1,186.6 979.8,186.5 974.5,188.7 
+                        973.8,193.1 969.4,199.3 953.1,196 945.6,197.8 941.3,196.8 934.6,203.5 928.3,199.3 924,200.3 917.8,198.4 913.6,203.6 
+                        911.5,209 906,211.4 901.6,215.7 897.5,217.1 892.4,222.2 885.9,225.2 881.9,224.8 875.3,232.9 868.1,237.4 862.9,237.4 
+                        857.3,241.7 857.3,241.6 845.1,248.1 837.8,244.2 830,246.1 822.7,243 819.5,244.3 815.2,243 809.4,237.9 805.6,237.4 
+                        797.3,242.4 790.7,241.4 790.7,240.9 784.5,243.6 778.4,244.1 770.5,247.6 767.1,251.3 763.2,250.1 757.5,254 746.1,255.3 
+                        743.6,253.5 733.6,253.1 733.5,253.2 726.4,251.4 721.8,252.3 715.5,247 715.3,242.4 709.6,241.5 704,249.3 700.1,249.1 
+                        694,244.7 686.4,242.2 680.2,242.5 674.4,240.4 673.8,236 670.9,232.3 662.4,228.5 650.2,227.2 647.7,233 641.5,237.2 635.8,234 
+                        635.3,231.9 629.7,229.3 623.8,222.2 622.5,210.2 618.3,204.9 613,202.5 609.6,204.7 595,210.5 588.6,210.2 583.2,206.7 
+                        577.5,205.1 573.4,201.8 566,188.9 568.3,183.4 561.7,178.2 557.3,177.8 554.1,184.5 549.4,187.9 543.9,189.1 536.8,188.9 
+                        532.5,187.2 524.2,189.4 517.6,188.6 517.6,188.7 506.3,187.3 499.3,187.9 485.3,186.5 481.3,185.5 469.6,184.9 469.5,184.9 
+                        460.8,189.4 452.2,192.3 447.8,194.7 441,196.4 430.8,197.8 419.1,204.8 411.7,206.5 404.6,214.9 399.3,216.7 390,221.7 
+                        378.4,229.2 364.1,235 363.8,243.3 360.8,246.9 354.5,251 339.5,251.3 328.4,250.5 325.8,248.3 311,244.3 302.2,241.1 
+                        294.5,245.7 280,244.5 280,244.3 266.4,241.8 245.3,236.5 239.5,238.5 237.8,240.3 239,236.8 227.8,234 211.3,225.2 199.7,219.4 
+                        190.1,212.4 184.2,204.7 184.6,202.5 178.9,191.6 179.5,187.3 183.3,187.3 182,180.7 170.2,178.4 169,181.9 165.8,180 
+                        159.4,180.7 155.8,184.2 149.5,178.7 142,169.4 136.3,171.6 127.9,169.8 122.9,175.1 117.7,176.3 117.7,175.9 111.8,176.6 
+                        105.7,175.6 101,178.3 99.2,185.5 91.1,185.4 88.5,187.4 88,193.4 95.5,196.7 94.8,198.5 101.1,203.5 101.9,202.5 102.8,218.6 
+                        100.3,221.6 97.6,219.8 89,226 85.4,226.1 83.8,235.8 83.8,235.9 85.2,247.1 77.5,251.3 76.5,255.1 71.9,260.5 65.9,262.5 
+                        67.8,272.1 80.6,273.9 88.5,273.2 91.7,274.9 97.8,272.4 107.5,271.7 109.7,275.6 104.4,277.9 100.8,281.4 96.6,281.2 87,285.7 
+                        80.4,290.7 73.6,293.3 76.6,298.5 75.8,302.8 68.9,313 73.9,312.6 82.8,306.5 81.3,303.1 86.8,300.6 97,292.8 101.3,286 
+                        116.9,279.6 116.9,279.7 117.3,279.5 117.5,279.4 117.5,279.3 122,276 129.3,275.1 135.9,270.2 138.6,266.4 144,261.5 
+                        147.2,253.6 150.3,250.6 161.9,249.7 168.5,252.5 174.3,253 177.5,248.5 186.8,246 186.8,245.8 190,245.8 202.1,250.1 
+                        206.6,253.7 208.3,249.1 209.1,254.5 217.6,254.8 221.8,256.3 228.6,253.4 231,253.8 232.1,251.9 232.9,255.4 239.3,260.4 
+                        244.9,263.5 244.8,263.5 250.4,272.5 254.7,271.5 267.8,271.5 273.1,273.9 281.9,273.9 281.6,276.2 272.5,275.2 261.9,277.2 
+                        258.6,274.4 254.2,277.2 252.3,275.8 246,278.6 229.5,279.3 218.3,285.5 216.9,288.1 224.9,292.4 229,293 229,292.8 233.6,292 
+                        237.4,295 234.6,295.3 233.1,299 227.3,299.5 217.1,296.1 209.5,298.5 201.4,295.6 186,294.9 186.4,294.4 180.3,294.3 170.9,296 
+                        169.2,293.9 176.9,288.9 173,286.3 161.3,283.2 156.5,285.6 162.2,294.3 166.8,294.9 161.9,298.9 149.6,298.6 149.6,298.8 
+                        143.4,298 137.4,294.1 135.9,287.7 123.9,287.2 119.1,291.3 103.6,289.4 89.5,302.2 84.1,303.3 82.8,309.5 77.9,315.4 71.4,315.7 
+                        68.4,320.4 66.6,335.2 67.6,337.9 66.3,343.4 64.1,345.3 61.1,354.4 65.9,356 74.1,354.4 77.9,355.2 83.5,352.7 95.8,351.4 
+                        95.8,351.4 108.2,349.8 110.3,350.6 109.2,356.4 101.9,359.8 102.5,362.4 89.8,370.9 96.6,372.4 99.2,378.7 99,378.8 104.5,386.4 
+                        100.1,388.7 99.7,395.1 102.6,397.9 106.7,396.5 109.9,398.1 113.1,396.9 113.9,400.3 104.2,404.6 105.5,408.8 103.6,410.4 
+                        99.9,408.7 93.7,410.9 95.1,419 100.4,420.8 99.4,424.4 102.5,426.9 104.9,433.2 110.2,431.4 117,432 113.6,435.3 109.5,434.3 
+                        104.3,436.6 95.4,436.9 93.3,431.7 89.4,435.3 89.2,439.5 86.8,433 88.5,425.4 81.9,415.1 76.5,412.6 72.1,416.9 74.6,427 
+                        74.6,427.2 79.9,431.1 76.9,431.2 78,435.9 72.1,438.8 69,437 63.5,441.7 75.6,447.2 83.7,455.7 87,448.7 93.9,448.2 97,453.5 
+                        98.9,461.6 104.1,459.8 110.5,462.1 113.3,465.7 120.3,466.6 120.9,473 120.8,473.1 119.5,483.6 112.4,487 104.7,488.5 
+                        116.5,494.6 114,504.2 116.7,503.6 115.8,511.7 117.9,513.5 123.1,512.8 127.3,508.9 128.9,510.4 125.9,515.4 131.5,515.4 
+                        129.6,520.7 138.7,519.7 138,524.4 133.2,524.5 134.5,529.3 130.1,531.6 125.2,528.8 121.2,528.9 115.2,533.2 116.9,540.8 
+                        120,541.4 121.4,537.4 127.6,536.9 134.6,541.3 144,539.4 147.5,540.4 153.9,538.4 166.8,538.5 178.2,537.9 179,538.9 
+                        172.5,540.6 170.7,544.9 161.3,545.3 162.8,549.6 159.7,550.4 162.3,554.1 159.3,554.5 147.9,553.1 145.5,554.9 137.5,553 
+                        136.6,555.6 127.8,555.8 121.3,560.9 127.3,563.2 132.7,561.9 139.7,564.4 140.8,559.3 143.7,557.1 154.2,559.2 154.3,559.2 
+                        161.9,557.8 165.1,560.7 156.2,562.3 163.4,566.4 160.4,568.8 155.6,568.5 157.8,572.5 165.3,569.6 165.4,569.6 168.6,564.8 
+                        176.6,560 173.8,554.7 175.7,552.5 182.7,557.2 184.9,554 182.3,552.2 185.5,550.6 186.2,555.2 194.5,555.7 195.2,564.2 
+                        200.1,564 208.5,569.3 209.9,565.1 214.3,561.3 223.1,567.7 224,569.5 219.7,570 219,576.4 223.6,576 222.5,580.8 224.2,585.6 
+                        222,587.2 232,595 232.1,594.8 237.8,599.5 241.1,597.2 245.6,601.5 251.8,602 255.9,608.3 258.2,605.7 261.4,605.7 258,609.4 
+                        270.4,601.9 274.9,601.8 284.4,599.4 285.3,596.4 290.6,595.9 298.7,600.3 298.6,604.2 306.7,593.5 304.1,589.1 306.8,582.9 
+                        309.8,580.3 309.3,573.6 310.3,561.9 312.2,557.9 317,554.4 322.1,557.4 331.7,557.2 355,561 358.7,564.4 377.9,573.4 
+                        382.6,577.3 394.8,580.9 399.2,584.9 404.3,594.2 409.2,599.3 409.5,601.8 414.4,607.3 423.1,612.9 426.2,613.5 432.1,617 
+                        440.1,618.5 448.3,612.9 457,614.6 459.9,610.8 474.5,610.4 478.7,609 484.4,611.2 489.8,606.6 492.2,610.4 495.7,604.9 
+                        499,603.5 503.1,597.6 506.2,599.1 508.3,605.6 510.8,598.3 515.5,596.3 515.3,590.1 521,585.9 526.8,577.5 534.9,571.9 
+                        543,564.2 550.9,560.7 555.2,560.6 564.3,566.4 564.1,566.5 565,566.8 565,566.8 565,566.8 571.2,568.8 589.5,579.5 598.9,574.3 
+                        600.8,576 606.3,574.4 608.2,566 603.8,566.7 608.9,563 616,562 623.5,554.6 623.4,554.3 626,551.5 630.1,551.1 637.7,559.1 
+                        639.6,569.4 638.3,573.1 629.6,578.9 622.9,584.8 619.6,590.5 615.3,594.6 616.2,597.5 625.3,611.2 627,615.9 623.1,623.7 
+                        627.5,622.9 628.4,626.5 637.6,630.6 640.9,620.7 645.1,620.1 645.5,617.5 650.2,617.5 649.8,604.7 650.5,600.6 655,602.5 
+                        657.9,600.4 668,599.8 665.9,593 662.9,592.5 659.6,580.7 661.2,578 661.2,571.6 662.9,562.4 665.8,556.6 683.7,561.1 
+                        686.3,563.2 686.7,569 689.4,570.7 692.4,568 700.3,567.1 712.4,568.4 712.5,568.4 716.9,565.5 724.3,560.9 734,558.4 
+                        745.5,552.5 745.5,552.7 755.1,546.9 760.8,546.9 774.9,550.9 783.2,558.7 783.3,558.8 791.3,560.7 805,558.8 814.2,561.2 
+                        814.3,561.2 817.5,560.9 848.1,552.9 860.3,547.2 875.9,537.6 876.3,537.7 886,530.5 891.1,529.1 901.3,522.8 912,520.4 
+                        930.1,523 930.1,523 946.3,520.8 970.2,512.9 970.5,512.8 970.4,512.6 978.9,508.6 986.8,498.8 987.7,501.1 991.9,501 
+                        995.6,504.6 995,508.8 996.9,513.4 1008.9,509.4 1009,509.4 1016.7,493 1029.3,494.6 1029.4,494.6 1037.7,490.1 1040.3,489.9 
+                        1048.4,493.2 1048.4,493.2 1054.6,493.1 1054.6,493.1 1061.4,496.6 1069.8,496.9 1078.6,495.9 1081.2,497.7 1086.1,495.2 
+                        1091,488.3 1096.5,487.7 1104.7,490.9 1106.4,497.5 1103.5,503.1 1107.8,510.5 1112.7,510.5 1114.2,505.5 1118.8,503.3 
+                        1126.7,494.8 1135.6,493.6 1138.3,495.7 1137,488.3 1138.9,483.6"/>
+                </defs>
+                <clipPath id="SVGID_2_">
+                    <use xlink:href="#SVGID_1_" style="overflow:visible;"/>
+                </clipPath>
+                <rect x="8.3" y="21.9" class="st0" width="1139.8" height="774.5"/>
+                <g class="st1">
+                    <circle class="st2" cx="526.1" cy="400" r="148.5"/>
+                    <circle class="st3" cx="563.3" cy="400" r="118.8"/>
+                    <polygon class="st2" points="643.7,400 778.1,443.7 695,329.4 695,470.6 778.1,356.3"/>
+                </g>
+            </g>
+        </svg>
+        <div id="sloganText">EGEMENLİK KAYITSIZ ŞARTSIZ MİLLETİNDİR!</div>
     </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Profesyonel Web Siteleriyle İşinizi Dijitale Taşıyorum</h1>
-        <p>Modern, hızlı ve satış odaklı web tasarımları. Küçük işletmeler için özel çözümler.</p>
-        <a href="iletisim.html" class="btn">Projemi Başlatalım</a>
-      </div>
-      <div class="laptop-mockup">
-        <img src="assets/laptop.svg" alt="Laptop Mockup" class="laptop-img">
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Hizmetler</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Restoran Web Sitesi</h3>
-          <p>Menü yönetimi, rezervasyon entegrasyonu ve mobil uyumlu tasarım.</p>
-        </div>
-        <div class="card">
-          <h3>Avukat Web Sitesi</h3>
-          <p>Profesyonel görünüm, iletişim formu ve SEO dostu yapı.</p>
-        </div>
-        <div class="card">
-          <h3>Küçük İşletme Web Sitesi</h3>
-          <p>Markanızı yansıtan, hızlı ve güvenilir web sitesi.</p>
-        </div>
-      </div>
-    </section>
-<!-- PORTFÖY BÖLÜMÜ -->
-<section class="section">
-  <h2 class="section-title">Portföy</h2>
-  <div class="portfolio-grid">
-    <div class="project">
-      <img src="assets/projects/project1.jpg" alt="Lezzet Restoranı" class="project-img">
-      <div class="project-info">
-        <h4>Lezzet Restoranı</h4>
-        <p>Restoran Web Sitesi</p>
-        <button class="demo-btn" data-template="template1">Demoyu Gör</button>
-      </div>
+    
+    <div id="logoFinal">
+        <div id="congratsText">Cumhuriyetin 102. Yılı Kutlu Olsun!</div>
+        <div id="ataturkQuote1">Cumhuriyetin ışığıyla yeniliği inşa ediyoruz.</div>
+        <div id="ataturkQuote2">İlim ve fen nerede ise oradan alacağız ve her millet ferdinin kafasına koyacağız.</div>
+        <div id="ataturkName">MUSTAFA KEMAL ATATÜRK</div>
+        <img id="weblytixLogo" src="weblitix.logo.jpg"Weblytix Logo">
+        <div id="copyrightText">© 2025 Weblytix • Tüm Hakları Saklıdır.</div>
     </div>
-    <div class="project">
-      <img src="assets/projects/project2.jpg" alt="Yılmaz Hukuk" class="project-img">
-      <div class="project-info">
-        <h4>Yılmaz Hukuk</h4>
-        <p>Avukat Web Sitesi</p>
-        <button class="demo-btn" data-template="template2">Demoyu Gör</button>
-      </div>
-    </div>
-    <div class="project">
-      <img src="assets/projects/project3.jpg" alt="Moda Butiği" class="project-img">
-      <div class="project-info">
-        <h4>Moda Butiği</h4>
-        <p>Küçük İşletme</p>
-        <button class="demo-btn" data-template="template3">Demoyu Gör</button>
-      </div>
-    </div>
-    <div class="project">
-      <img src="assets/projects/project4.jpg" alt="Cafe Noir" class="project-img">
-      <div class="project-info">
-        <h4>Cafe Noir</h4>
-        <p>Restoran Web Sitesi</p>
-        <button class="demo-btn" data-template="template4">Demoyu Gör</button>
-      </div>
-    </div>
-    <div class="project">
-      <img src="assets/projects/project5.jpg" alt="Özkan Danışmanlık" class="project-img">
-      <div class="project-info">
-        <h4>Özkan Danışmanlık</h4>
-        <p>Avukat Web Sitesi</p>
-        <button class="demo-btn" data-template="template5">Demoyu Gör</button>
-      </div>
-    </div>
-    <div class="project">
-      <img src="assets/projects/project6.jpg" alt="Tekno Mağaza" class="project-img">
-      <div class="project-info">
-        <h4>Tekno Mağaza</h4>
-        <p>Küçük İşletme</p>
-        <button class="demo-btn" data-template="template6">Demoyu Gör</button>
-      </div>
-    </div>
-  </div>
-</section>
+    
+    <audio id="audioElement" preload="auto">
+        <source src="ATATÜRK'ÜN sesi.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- DEMO MODAL -->
-<div id="demo-modal" class="demo-modal">
-  <div class="demo-modal-content">
-    <span class="close-btn">&times;</span>
-    <div id="demo-content"></div>
-  </div>
-</div>
-
-<style>
-.portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-.project { background:#111; color:#fff; padding:20px; border-radius:12px; text-align:center; transition: transform 0.3s ease; }
-.project:hover { transform: translateY(-5px); }
-.project-img { width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:15px; }
-.demo-btn { background:#00ffff; color:#111; border:none; padding:10px 25px; border-radius:12px; cursor:pointer; font-weight:700; transition: background 0.3s ease; }
-.demo-btn:hover { background:#00ccff; }
-.demo-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:999; }
-.demo-modal-content { position:relative; width:90%; max-width:1000px; max-height:90vh; background:#111; border-radius:12px; padding:10px; overflow:auto; }
-.close-btn { position:absolute; top:10px; right:15px; font-size:28px; cursor:pointer; color:#00ffff; z-index:10; transition: color 0.3s ease; }
-.close-btn:hover { color:#00ccff; }
-</style>
-
-<script>
-// Modal ve içerik ayarları
-const demoModal = document.getElementById('demo-modal');
-const demoContent = document.getElementById('demo-content');
-const closeBtn = document.querySelector('.close-btn');
-const demoBtns = document.querySelectorAll('.demo-btn');
-
-const templates = {
-  template1: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Lezzet Restoranı</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Menü</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Rezervasyon</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/pizza.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">En Lezzetli Yemekler Burada!</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Rezervasyon yap veya menüyü incele.</p>
-        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Rezervasyon Yap</a>
-      </div>
-    </section>
-    
-    <section class="menu-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #00ffff, #00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Menümüz</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/pizza.jpg" alt="Pizza" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Pizza Margherita</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Taze domates, mozarella peyniri ve fesleğen</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺85</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/Spaghetti.jpg" alt="Spagetti" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Spagetti Carbonara</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Kremalı sos, pancetta ve parmesan peyniri</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺75</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/salata.jpg" alt="Salata" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#00ffff;">Çeşitli Salata</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Taze sebzeler, zeytinyağlı sos ve ceviz</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#00ccff;">₺45</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #00ffff, #00ccff);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Lezzet Restoranı. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@lezzetrestorani.com</p>
-    </footer>
-  `,
-
-  template2: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#4ade80;">Yılmaz Hukuk</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hizmetler</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ekibimiz</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Davalar</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/terazi.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#4ade80;">Hukuki Danışmanlık</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Uzman avukatlarımızla her daim yanınızdayız. Haklarınızı korumak için buradayız.</p>
-        <a href="#" style="display:inline-block;background:#4ade80;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Danışmanlık Al</a>
-      </div>
-    </section>
-    
-    <section class="services-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#4ade80;">Hizmetlerimiz</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">⚖️</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">İş Hukuku</h3>
-          <p style="color:#ccc;">Şirketler arası anlaşmazlıklar, işçi-işveren ilişkileri ve ticari hukuk konularında uzman ekibimiz.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">🔒</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">Ceza Hukuku</h3>
-          <p style="color:#ccc;">Savunma, kefalet başvuruları ve ceza mahkemelerinde temsil hizmeti sunuyoruz.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#4ade80;">📝</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#4ade80;">Sözleşme Hazırlama</h3>
-          <p style="color:#ccc;">Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Yılmaz Hukuk. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@yilmazhukuk.com</p>
-    </footer>
-  `,
-
-  template3: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Moda Butiği</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ürünler</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Koleksiyon</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/elbise.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Şık Tasarımlar</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Yeni sezon ürünlerimizle tarzınızı keşfedin ve kendinizi ifade edin.</p>
-        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Koleksiyonu Gör</a>
-      </div>
-    </section>
-    
-    <section class="products-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #ff6b6b, #ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Yeni Ürünler</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/elbise.jpg" alt="Elbise" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Yazlık Elbise</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Hafif ve şık yazlık elbise</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺450</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/ayakkabı.jpg" alt="Ayakkabı" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Deri Ayakkabı</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Rahat ve şık deri ayakkabı</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺850</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/canta.jpg" alt="Çanta" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#ff6b6b;">Deri Çanta</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Elegant deri el çantası</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ffa500;">₺650</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #ff6b6b, #ffa500);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Moda Butiği. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@modabutigi.com</p>
-    </footer>
-  `,
-
-  template4: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#fbbf24;">Cafe Noir</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Menü</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Rezervasyon</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/latte.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(44, 7, 29, 0.7), rgba(26, 26, 46, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#fbbf24;">Premium Kahve Deneyimi</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">En iyi kahveleri, pastaları ve atmosferi burada tadın.</p>
-        <a href="#" style="display:inline-block;background:#fbbf24;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Rezervasyon Yap</a>
-      </div>
-    </section>
-    
-    <section class="menu-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#fbbf24;">Menümüz</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/Espresso.jpg" alt="Espresso" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Double Espresso</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Çift doz kahve çekirdekleriyle hazırlanmış yoğun espresso</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺45</div>
-            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/latte.jpg" alt="Latte" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Vanilla Latte</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Vanilyalı süt ve espresso karışımı</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺55</div>
-            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/pasta.jpg" alt="Pastane" style="height:200px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#fbbf24;">Çikolatalı Pasta</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Ev yapımı çikolatalı kek ve krema</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#fcd34d;">₺65</div>
-            <button style="display:block;width:100%;background:#fbbf24;color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Sipariş Ver</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Cafe Noir. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@cafenoir.com</p>
-    </footer>
-  `,
-
-  template5: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;color:#3b82f6;">Özkan Danışmanlık</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hizmetler</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Danışmanlık</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Referanslar</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/laptop.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(15, 15, 35, 0.7), rgba(26, 26, 46, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;color:#3b82f6;">Profesyonel Danışmanlık</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">İş ve hukuk alanında uzman ekibimizle her daim yanınızdayız.</p>
-        <a href="#" style="display:inline-block;background:#3b82f6;color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Danışmanlık Al</a>
-      </div>
-    </section>
-    
-    <section class="services-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#3b82f6;">Hizmetlerimiz</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">📊</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">Vergi Danışmanlığı</h3>
-          <p style="color:#ccc;">Kurumsal ve bireysel vergi planlaması, beyanname hazırlama ve denetim hizmetleri.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">⚖️</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">İş Hukuku</h3>
-          <p style="color:#ccc;">Şirket kurulumu, sözleşmeler, iş anlaşmazlıkları ve ticari hukuk konularında destek.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;padding:2rem;text-align:center;transition:transform 0.3s ease;">
-          <div style="font-size:3rem;margin-bottom:1.5rem;color:#3b82f6;">📝</div>
-          <h3 style="font-size:1.5rem;margin-bottom:1rem;color:#3b82f6;">Sözleşme Hazırlama</h3>
-          <p style="color:#ccc;">Her türlü ticari ve bireysel sözleşmelerinizi hukuki güvenceyle hazırlıyoruz.</p>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Özkan Danışmanlık. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@ozkandansmanlik.com</p>
-    </footer>
-  `,
-
-  template6: `
-    <nav class="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;">
-      <div class="logo" style="font-size:1.8rem;font-weight:800;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Tekno Mağaza</div>
-      <div class="nav-links" style="display:flex;gap:2rem;">
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Anasayfa</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Ürünler</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Kampanyalar</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">Hakkımızda</a>
-        <a href="#" style="color:#e0e0e0;text-decoration:none;font-weight:500;transition:color 0.3s ease;">İletişim</a>
-      </div>
-    </nav>
-    
-    <section class="hero" style="text-align:center;padding:6rem 2rem;background:url('assets/projects/tablet.jpg') center/cover no-repeat;position:relative;">
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));"></div>
-      <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;">
-        <h1 style="font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">En Yeni Teknoloji Ürünleri</h1>
-        <p style="font-size:1.2rem;color:#ccc;margin-bottom:2rem;">Güncel ürünler ve fırsatlarla teknoloji dünyasına adım atın.</p>
-        <a href="#" style="display:inline-block;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;padding:12px 32px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.3s ease;">Ürünleri Gör</a>
-      </div>
-    </section>
-    
-    <section class="products-section" style="padding:5rem 2rem;">
-      <h2 style="text-align:center;font-size:2.5rem;margin-bottom:3rem;background:linear-gradient(45deg, #8b5cf6, #ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Popüler Ürünler</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem;max-width:1200px;margin:0 auto;">
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/telefon.jpg" alt="Telefon" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Akıllı Telefon</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">En yeni nesil akıllı telefon</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺12.500</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/laptop.jpg" alt="Laptop" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Gaming Laptop</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Yüksek performanslı oyun laptopu</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺25.000</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:transform 0.3s ease;">
-          <img src="assets/projects/tablet.jpg" alt="Tablet" style="height:300px;width:100%;object-fit:cover;">
-          <div style="padding:1.5rem;text-align:center;">
-            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;color:#8b5cf6;">Pro Tablet</h3>
-            <p style="color:#ccc;margin-bottom:1rem;">Profesyonel kullanım için tablet</p>
-            <div style="font-size:1.3rem;font-weight:700;color:#ec4899;">₺8.500</div>
-            <button style="display:block;width:100%;background:linear-gradient(45deg, #8b5cf6, #ec4899);color:#111;border:none;padding:12px;border-radius:12px;font-weight:700;cursor:pointer;transition:transform 0.3s ease;">Satın Al</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <footer style="background:rgba(0,0,0,0.3);padding:3rem 2rem;text-align:center;color:#ccc;">
-      <p>© 2025 Tekno Mağaza. Tüm hakları saklıdır.</p>
-      <p>Bizimle iletişime geçin: info@teknomagaza.com</p>
-    </footer>
-  `
-};
-
-// Buton tıklama olayları
-demoBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const templateKey = btn.getAttribute('data-template');
-    demoContent.innerHTML = templates[templateKey];
-    demoModal.style.display = 'flex';
-  });
-});
-
-// Kapatma butonu
-closeBtn.addEventListener('click', () => {
-  demoModal.style.display = 'none';
-});
-
-// Modal dışına tıklama ile kapatma
-demoModal.addEventListener('click', (e) => {
-  if (e.target === demoModal) {
-    demoModal.style.display = 'none';
-  }
-});
-</script>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© 2025 Weblytix. Tüm hakları saklıdır.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script>
+        // Create beep sound using Web Audio API
+        let audioContext;
+        const initAudio = () => {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        };
+        
+        const playBeep = () => {
+            if (!audioContext) return;
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.frequency.value = 800;
+            oscillator.type = 'square';
+            gainNode.gain.value = 0.1;
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.1);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        };
+        
+        // Matrix Scene
+        class MatrixScene {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.fontSize = 14;
+                this.columns = Math.floor(canvas.width / this.fontSize);
+                this.drops = [];
+                this.chars = '01';
+                this.init();
+            }
+            
+            init() {
+                for (let i = 0; i < this.columns; i++) {
+                    this.drops[i] = Math.floor(Math.random() * -100);
+                }
+            }
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+                this.columns = Math.floor(this.canvas.width / this.fontSize);
+                this.drops = [];
+                for (let i = 0; i < this.columns; i++) {
+                    this.drops[i] = Math.floor(Math.random() * -100);
+                }
+            }
+            
+            draw() {
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.ctx.fillStyle = '#00e0ff';
+                this.ctx.font = `${this.fontSize}px monospace`;
+                
+                for (let i = 0; i < this.columns; i++) {
+                    const text = this.chars.charAt(Math.floor(Math.random() * this.chars.length));
+                    const x = i * this.fontSize;
+                    const y = this.drops[i] * this.fontSize;
+                    
+                    this.ctx.fillText(text, x, y);
+                    
+                    if (y > this.canvas.height && Math.random() > 0.975) {
+                        this.drops[i] = 0;
+                    }
+                    this.drops[i]++;
+                }
+            }
+        }
+        
+        // Scene Manager
+        class SceneManager {
+            constructor() {
+                this.currentScene = 0;
+                this.sceneStartTime = 0;
+                this.matrixScene = null;
+                this.terminalText = document.getElementById('terminalText');
+                this.flagContainer = document.getElementById('flagContainer');
+                this.logoFinal = document.getElementById('logoFinal');
+                this.audioElement = document.getElementById('audioElement');
+                
+                this.init();
+                this.start();
+            }
+            
+            init() {
+                const matrixCanvas = document.getElementById('matrixCanvas');
+                this.matrixScene = new MatrixScene(matrixCanvas);
+                
+                window.addEventListener('resize', () => {
+                    this.matrixScene.resize();
+                });
+                
+                this.matrixScene.resize();
+            }
+            
+            start() {
+                this.sceneStartTime = Date.now();
+                this.animate();
+                this.playScene1();
+            }
+            
+            animate() {
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - this.sceneStartTime;
+                
+                // Always keep matrix running in the background
+                this.matrixScene.draw();
+                
+                // Scene 1: Matrix (0-10 seconds)
+                if (this.currentScene === 0) {
+                    if (elapsedTime > 10000) {
+                        this.fadeOutScene1();
+                    }
+                }
+                // Scene 2: Flag (10-25 seconds) - 15 seconds duration
+                else if (this.currentScene === 1) {
+                    if (elapsedTime > 25000) {
+                        this.fadeOutScene2();
+                    }
+                }
+                // Scene 3: Final (25-30 seconds)
+                else if (this.currentScene === 2) {
+                    if (elapsedTime > 30000) {
+                        this.fadeOutScene3();
+                    }
+                }
+                
+                requestAnimationFrame(() => this.animate());
+            }
+            
+            playScene1() {
+                const messages = [
+                    "SİSTEM BAŞLATILIYOR: TÜRKİYE_REPUBLIC_1923.exe",
+                    "SİSTEM TEMELİ YÜKLENİYOR...",
+                    "AYDINLIK = ÖZGÜRLÜK | KOD = GELECEK | BİRLİK = GÜÇ"
+                ];
+                
+                let messageIndex = 0;
+                let charIndex = 0;
+                let currentText = "";
+                
+                const typeMessage = () => {
+                    if (messageIndex >= messages.length) {
+                        return;
+                    }
+                    
+                    const message = messages[messageIndex];
+                    if (charIndex < message.length) {
+                        currentText += message[charIndex];
+                        this.terminalText.textContent = currentText;
+                        charIndex++;
+                        initAudio();
+                        playBeep();
+                        setTimeout(typeMessage, 50);
+                    } else {
+                        messageIndex++;
+                        charIndex = 0;
+                        currentText = "";
+                        if (messageIndex < messages.length) {
+                            setTimeout(typeMessage, 1000);
+                        }
+                    }
+                };
+                
+                setTimeout(() => {
+                    this.terminalText.style.opacity = '1';
+                    typeMessage();
+                }, 1000);
+            }
+            
+            fadeOutScene1() {
+                let opacity = 1;
+                const fade = () => {
+                    opacity -= 0.02;
+                    this.terminalText.style.opacity = opacity;
+                    document.getElementById('matrixCanvas').style.opacity = opacity;
+                    if (opacity > 0) {
+                        requestAnimationFrame(fade);
+                    } else {
+                        this.terminalText.style.opacity = '0';
+                        document.getElementById('matrixCanvas').style.opacity = '1'; // Keep matrix visible but not fading out completely
+                        this.currentScene = 1;
+                        this.sceneStartTime = Date.now();
+                        this.playScene2();
+                    }
+                };
+                fade();
+            }
+            
+            playScene2() {
+                this.flagContainer.style.opacity = '1';
+                // Play audio when flag scene starts
+                try {
+                    this.audioElement.currentTime = 0;
+                    this.audioElement.play().catch(e => console.log("Audio play failed:", e));
+                } catch (e) {
+                    console.log("Audio playback not supported or failed:", e);
+                }
+            }
+            
+            fadeOutScene2() {
+                let opacity = 1;
+                const fade = () => {
+                    opacity -= 0.02;
+                    this.flagContainer.style.opacity = opacity;
+                    if (opacity > 0) {
+                        requestAnimationFrame(fade);
+                    } else {
+                        this.flagContainer.style.opacity = '0';
+                        this.currentScene = 2;
+                        this.sceneStartTime = Date.now();
+                        this.playScene3();
+                    }
+                };
+                fade();
+            }
+            
+            playScene3() {
+                this.logoFinal.style.opacity = '1';
+                document.getElementById('matrixCanvas').style.opacity = '0';
+                // Stop audio when moving to final scene
+                try {
+                    this.audioElement.pause();
+                    this.audioElement.currentTime = 0;
+                } catch (e) {
+                    console.log("Audio stop failed:", e);
+                }
+            }
+            
+            fadeOutScene3() {
+                let opacity = 1;
+                const fade = () => {
+                    opacity -= 0.02;
+                    this.logoFinal.style.opacity = opacity;
+                    if (opacity > 0) {
+                        requestAnimationFrame(fade);
+                    } else {
+                        this.logoFinal.style.opacity = '0';
+                        // Animation complete
+                    }
+                };
+                fade();
+            }
+        }
+        
+        // Start the animation when page loads
+        window.addEventListener('load', () => {
+            new SceneManager();
+        });
+        
+        // Handle user interaction to enable audio on mobile devices
+        document.addEventListener('click', () => {
+            const audio = document.getElementById('audioElement');
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio play on user interaction:", e));
+            }
+        }, { once: true });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
